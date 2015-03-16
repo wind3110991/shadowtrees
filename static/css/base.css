@@ -1,0 +1,23 @@
+.copyright {
+  color:#080808;
+  font-size:8px;
+  font-family:"Microsoft YaHei" !important;
+  border-bottom:10px;
+}
+body {  
+    padding-bottom: 20px;  
+    background-repeat:no-repeat; 
+    padding: 60px 0;  
+}  
+.blog_title{
+  font-size:30px;
+}
+h1,h2,h3{
+    color:#FFFFFF;
+}
+body {  
+    padding-bottom: 20px;  
+    
+    background-repeat:no-repeat; 
+    padding: 60px 0;  
+}  

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	
+  <meta charset="UTF-8">
+
+  <title>生活空间，Life Space</title>
+
+    <style>
+* {
+  padding : 0;
+  margin  : 0;
+  border  : 0;
+}
+
+*:after , *:before {
+  display : block;
+  content : "";
+  position: absolute;
+}
+
+h1 {
+	color:#FFFFFF;
+	font-size:30px;
+	font-family:"Microsoft YaHei" !important;
+ background: #8E8E8E;
+ padding: 50px;
+}
+h2 {
+	color:#595959;
+	font-size:20px;
+	font-family:"Microsoft YaHei" !important;
+
+}
+
+.backgroundimg{
+  text-align:center;
+}
+
+body {
+  
+  background-image : url();
+  
+}
+
+nav {
+  width : 650px;
+  margin: auto;
+  position : relative;
+}
+
+
+
+menu:after {
+  clear : both;
+  right : -61px;
+  border-right : 1px solid #857e74;
+}
+
+menu:before {
+  left  : -55px;
+  border-left : 1px solid #857e74;
+}
+
+
+
+.copyright {
+  color:#FFFFFF;
+  font-size:8px;
+  font-family:"Microsoft YaHei" !important;
+  background: #080808;
+  padding: 10px;
+}
+
+.right:before {
+  top      : -25px;
+  border-width : 0 40px 38px 38px;
+  border-color : transparent transparent #eae2d5 transparent;			
+}
+
+.right:after {
+  top      : -65px;
+  border-width : 58px 56px 0 0;
+  border-color : #eae2d5 transparent transparent transparent;
+}
+
+li {
+  float       : left;
+  position    : relative;
+  margin-left : 33px;
+  cursor      : pointer;
+  background-color   : #eae2d5;
+  list-style-type    : none;
+  border-left        : 2px solid #d7cfc2;
+  border-right       : 2px solid #d7cfc2;
+  transition : margin .1s ,padding .1s ,border 1s;
+}
+
+li:first-child {
+  margin-left : 20px;
+}
+
+
+li:before , li:after {
+  display    : block;
+  position   : absolute;
+  top        : 0;
+  width      : 20px;
+  height     : 100%;
+  background : inherit;
+  transition : all .1s;
+}
+
+li:before {
+  right : 100%;
+} 
+
+
+li:after {
+  left : 100%; 
+}
+li:hover {
+  margin-top 		   : -9px;
+  box-shadow         : 0 4px 10px 0px #000;
+  transition : margin .2s ,padding .2s;
+} <!--突起效果1-->
+
+
+li:hover:before {
+  transform : rotate(-30deg) skew(-30deg) translate(1.5px,9px);
+}
+li:hover:after {
+  transform : rotate(30deg) skew(30deg) translate(-1.5px,9px);
+}
+
+a {
+  display : block;
+  padding : 10px 15px;
+  text-decoration : none;
+  text-align      : center
+}
+
+a span {
+  text-shadow : 1px 1px 1px #FFF;
+  color       : #857e74;
+  transition  : all .2s;
+}
+
+a span:first-child {
+  font-family : icon;
+  font-size   : 33px;
+  display     : block;
+}
+
+a span:last-child {
+  text-transform : capitalize;
+  font-family    : 'Georgia';
+  font-size      : 11px;
+  letter-spacing : 1px;
+  font-style     : italic;
+  color   	   : #6488ba;
+}
+
+
+
+li:hover span {
+  transition : all .2s;
+}
+
+li:hover a span:first-child {
+  color : #6488ba;
+  text-shadow  : 1px 1px 1px #FFF , 0 0 1px #6488ba;
+}
+
+li:hover a span:last-child {
+  color : #857e74;
+}
+
+@font-face {
+  font-family :icon;
+  src: url('http://bennettfeely.com/fonts/icons.woff'); 
+}
+</style>
+
+    <script src="js/prefixfree.min.js"></script>
+
+</head>
+<h1 align="center">生活空间</h1>
+<br/>
+<h2 align="center">定制，你的生活方式</h2>
+<body>
+<div style="text-align:center;clear:both;margin-bottom:40px">
+<script src="/gg_bd_ad_720x90.js" type="text/javascript"></script>
+<script src="/follow.js" type="text/javascript"></script>
+</div>
+  <nav>
+  <menu>
+    <li id="levis">
+      <a href="http://levi.com.cn/?hmsr=SEM&hmmd=brand&hmpl=title&hmkw=title1" target="_blank">
+        <img src="http://www.hongkongcard.com/images/merchant_detail/ml_3654.jpg" width=“150” height="55"></img>
+      </a>
+    </li>
+    <li id="apple">
+      <a href="http://www.apple.com.cn" target="_blank">
+       <img src="http://img.hexun.com/2011-03-04/127700393.jpg" width=“150” height="55"></img>
+      </a>
+    </li>
+    <li id="kobe">
+      <a href="http://www.kobechina.com.cn/forum.php" target="_blank">
+       <img src="http://www.jdsc.com.cn/uploadfile/2010/0527/20100527094017490.jpg" width=“150” height="55"></img>
+      </a>
+    </li>
+    <li>
+      <a href="http://www.yohobuy.com/" target="_blank">
+		  <img src="http://img02.static.yohobuy.com/product/2011/12/27/16/02949f2de45bb8c4b0ec6bcc1c3cbd0b36.jpg" width=“150” height="55"></img>
+      </a>
+    </li>
+  </menu>
+  <div class="ribbon left"></div>
+  <div class="ribbon right"></div>
+</nav>
+<br />
+<br />
+<br />
+<br /><br />
+<br /><br />
+<br /><br />
+<br />
+
+<script>
+var curIndex=0;
+var timeInterval=5000;
+var arr=new Array();
+var arrWeb=new Array();
+arr[0]="http://imglf4.ph.126.net/3zhEimItB4RElfHU4NRhiA==/6597791046284502424.jpg";
+arr[1]="http://abc.2008php.com/2011_Website_appreciate/2011-10-13/20111013214302.jpg";
+arr[2]="http://www.024haoyuzuche.com/img/aHR0cDovL2ltZy51cGxvYWQudG9tLmNvbS9kYXRhMy91cGxvYWQvMjQvNjM5LzEyOTY2MzM3NzkzNDcyODQ1NTQyLmpwZw==.jpg";
+arr[3]="http://pic2.duowan.com/news/1210/214228446151/214228538017.jpg";
+arrWeb[0]="http://tieba.baidu.com/f?kw=地下乐队&ie=utf-8&fr=wwwt";
+arrWeb[1]="http://www.levi.com.cn";
+arrWeb[2]="http://tieba.baidu.com/f?kw=科比&ie=utf-8&fr=wwwt";
+arrWeb[3]="http://weibo.com/realyuwenle?c=spr_qdhz_bd_baidusmt_weibo_s&nick=余文樂";
+setInterval(changeImg,timeInterval);
+function changeImg()
+{
+  var obj=document.getElementById("obj");
+  var objWeb=document.getElementById("objWeb");
+  if(curIndex==arr.length-1)
+  {
+    curIndex=0;
+  }
+  else
+  {
+    curIndex+=1;
+  }
+  obj.src=arr[curIndex];
+  objWeb.href=arrWeb[curIndex];
+}
+$(document).ready(changeImg);
+</script>
+ <!--
+ <script> 
+    var head = document.getElementsByTagName('head')[0]; 
+    var script= document.createElement("script"); 
+    script.type = "text/javascript"; 
+    script.src="index.js"; 
+    head.appendChild(script); 
+</script>
+-->
+<div class="backgroundimg">
+<a id="objWeb" href="http://tieba.baidu.com/f?kw=地下乐队&ie=utf-8&fr=wwwt" target="_blank">
+<img id="obj" src="http://imglf4.ph.126.net/3zhEimItB4RElfHU4NRhiA==/6597791046284502424.jpg" width="900" height="600"/>
+</a></div>
+<br/> 
+<p></p>
+<br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<div class="copyright">
+<p id="copyright" align=center><a href="blogofwindy.sinaapp.com"></a>                    
+                    Copyright © 2012 - 2014 SCUT 骏宇 保留所有权利.<br/><br/>
+                    blogofwindy.sinaapp.com
+ </p>
+</div>
+</body>
+
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+</script>

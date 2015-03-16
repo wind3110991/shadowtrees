@@ -1,0 +1,95 @@
+{% load comments %}
+<div class="comments">
+      <a name="blog_comments" id="comments"></a>
+      {% get_comment_count for blog as comment_count %}
+
+      <div class="comments_nav"><span class="glyphicon glyphicon-eye-open" style="color:#878787">阅读<span class="badge">{{ blog.counts }}</span></span>
+              &nbsp;&nbsp;&nbsp;
+              <span style="color:#878787" class="glyphicon glyphicon-thumbs-up">赞<span class="badge">{{blog.markCount}}</span></span>
+              &nbsp;&nbsp;&nbsp;
+              <span style="color:#878787" class="glyphicon glyphicon-comment">评论<span class="badge">{{ comment_count }}</span></span>
+      </div>
+
+<br/><br/>
+
+      {% ifequal comment_count 0 %}
+        <div class="comments_body">
+          <div class="comment_container">
+            <h1>
+              <small align="center" style="font-size:16px">This tree hasn't got any shadow yet～</small></h1>
+        </div>
+      {% else %}
+        {% get_comment_list for blog as comments %}
+        <div class="comments_body">
+            {% for comment in comments %}
+            <div class="comment_container">
+              <div class="comment_id"></div>
+                
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <a>{{ comment.user_name }}  </a>  &nbsp;&nbsp;&nbsp;&nbsp;  
+      <span class="glyphicon glyphicon-time">{{ comment.submit_date|date:"Y-m-d H:i"}}</span>  &nbsp;&nbsp;&nbsp;&nbsp;评论
+  </div>
+  <div class="panel-body">
+    <p id="comment_content" ><a href="{{ comment.user_url }}"><img src="http://www.qqmofasi.com/data/attachments/2014/06/23/97_bg4E65ne6h1n8k6E8787_square.jpg" width="60" height="60" /></a>{{ comment.comment }}</p>
+  </div>
+</div>  
+
+            <span class="reply_comment" style="float:right;" id="{{ comment.user_name }}"><a href="#newcomment">回复</a></span>
+            </div>
+            <hr/>
+            {% endfor %}
+      {% endifequal %}
+</div>
+</br>
+<div class="comments_nav"></div>
+<h1><small style="font-size:16px"><span class="label label-default">留下您的Shadows</span></small></h1>
+      {% get_comment_form for blog as blog_form %}
+      <div class="comments_body">
+        <div class="comment_form">
+          <form class="form-horizontal" action="{% comment_form_target %}" method="post" id="cmt_sub_form">
+            {% csrf_token %}
+            {{ blog_form.object_pk }}
+            {{ blog_form.content_type }}
+            {{ blog_form.timestamp }}
+            {{ blog_form.site }}
+            {{ blog_form.submit_date }}
+            {{ blog_form.security_hash }}
+            <div class="control-group">
+              <label class="control-label" for="id_name"><span class="label label-default">用户名：</span> </label>
+              <div class="controls">
+                <input type="text" id="id_name" class="input-xlarge" name="name" placeholder="请输入您的用户名" value=""/>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="id_email"><span class="label label-default">E-mai : </span></label>
+              <div class="controls">
+                <input class="input-xlarge" id="id_email" type="email" name="email" placeholder="请输入您的邮箱地址" value="{{ user.email }}"/>
+              </div>
+            </div>
+           <!-- <div class="control-group">
+              <label class="control-label" for="id_email">网址： </label>
+              <div class="controls">
+                <input class="input-xlarge" id="id_url" type="url" name="url" placeholder="请输入您的网址" value="{{ user.url }}"/>
+              </div>
+            </div>  -->
+
+            <a name="newcomment" id="newcomment"></a>
+            <div class="control-group">
+              <label class="control-label" for="id_comment"><span class="label label-default">评论 : </span></label>
+              <div class="controls">
+                <textarea rows="5" cols="65" class="input-xlarge comment" id="id_comment" name="comment" placeholder="请输入评论内容"></textarea>
+              </div>
+            </div>
+            <p style="display:none;"><label for="id_honeypot">如果你在该字段中输入任何内容，你的评论就会被视为垃圾评论。</label> <input type="text" name="honeypot" id="id_honeypot"></p>
+            <div class="controls">
+              <div class="form-actions">
+                <input class="btn btn-info" id="submit_btn" type="submit" name="submit" value="回复"/>
+                <input type="hidden" name="next" value="/blog_detail/?id={{ blog.id }}"/>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+</div>
