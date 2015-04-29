@@ -45,7 +45,7 @@ def blog_search(request):
                 matchCaption = re.search(search_content,tempCaption)
                 matchContent = re.search(search_content,tempContent)
                 if matchContent or matchCaption:
-                    blogs = Blog.objects.filter(caption=tempCaption)     
+                    blogs = Blog.objects.filter(caption=tempCaption)    
                     return render_to_response('index.html', {"blogs": blogs}, context_instance=RequestContext(request))          
     except Blog.DoesNotExit:
         raise Http404
