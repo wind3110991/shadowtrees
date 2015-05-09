@@ -26,15 +26,52 @@
               <div class="comment_id"></div>
                 
 
+{% ifequal comment.user_email '312456073@qq.com' %}
 <div class="panel panel-default">
   <div class="panel-heading">
-    <a>{{ comment.user_name }}  </a>  &nbsp;&nbsp;&nbsp;&nbsp;  
+    
+    <a>{{ comment.user_name }}  </a><img src="/static/img/mod.png" width="30" height="14"/> &nbsp;&nbsp;&nbsp;&nbsp;  
+  
+   
       <span class="glyphicon glyphicon-time">{{ comment.submit_date|date:"Y-m-d H:i"}}</span>  &nbsp;&nbsp;&nbsp;&nbsp;评论
   </div>
   <div class="panel-body">
-    <p id="comment_content" ><a href="{{ comment.user_url }}"><img src="http://www.qqmofasi.com/data/attachments/2014/06/23/97_bg4E65ne6h1n8k6E8787_square.jpg" width="60" height="60" /></a>{{ comment.comment }}</p>
+    <table>
+<tr>
+      <a href="{{ comment.user_url }}">
+        <td><img src="http://maxcdn.thedesigninspiration.com/wp-content/uploads/2014/01/Flat-Design-Heroes-006.jpg" width="80" height="95" />
+        </a></td>
+         &nbsp;&nbsp;
+        <td>{{ comment.comment }}</td>
+      </tr>
+   </table>
   </div>
 </div>  
+
+  {% else %}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    
+    <a>{{ comment.user_name }}  </a>&nbsp;&nbsp;&nbsp;&nbsp;  
+  
+   
+      <span class="glyphicon glyphicon-time">{{ comment.submit_date|date:"Y-m-d H:i"}}</span>  &nbsp;&nbsp;&nbsp;&nbsp;评论
+  </div>
+  <div class="panel-body">
+    <table>
+<tr>
+      <a href="{{ comment.user_url }}">
+        <td><img src="http://www.qqmofasi.com/data/attachments/2014/06/23/97_bg4E65ne6h1n8k6E8787_square.jpg" width="80" height="80" />
+        </a></td>
+         &nbsp;&nbsp;
+        <td>{{ comment.comment }}</td>
+      </tr>
+   </table>
+  </div>
+</div>  
+
+    {% endifequal %}
+
 
             <span class="reply_comment" style="float:right;" id="{{ comment.user_name }}"><a href="#newcomment">回复</a></span>
             </div>
