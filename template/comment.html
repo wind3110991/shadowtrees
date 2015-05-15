@@ -30,7 +30,7 @@
 <div class="panel panel-default">
   <div id="userName" class="panel-heading">
     
-    <a><p>{{ comment.user_name }}</p></a><img src="/static/img/mod.png" width="30" height="14"/> &nbsp;&nbsp;&nbsp;&nbsp;  
+    <a>{{ comment.user_name }}  </a><img src="/static/img/mod.png" width="30" height="14"/> &nbsp;&nbsp;&nbsp;&nbsp;  
   
    
       <span class="glyphicon glyphicon-time">{{ comment.submit_date|date:"Y-m-d H:i"}}</span>  &nbsp;&nbsp;&nbsp;&nbsp;评论
@@ -39,7 +39,7 @@
     <table>
 <tr>
       <a href="{{ comment.user_url }}">
-        <td><img src="http://maxcdn.thedesigninspiration.com/wp-content/uploads/2014/01/Flat-Design-Heroes-006.jpg" width="80" height="95" />
+        <td><img src="/static/img/client.jpg" width="80" height="90" />
         </a></td>
          &nbsp;&nbsp;
         <td>{{ comment.comment }}</td>
@@ -52,7 +52,7 @@
 <div class="panel panel-default">
   <div id="userName" class="panel-heading">
     
-    <a><p>{{ comment.user_name }}  </p></a>&nbsp;&nbsp;&nbsp;&nbsp;  
+    <a>{{ comment.user_name }}</a>&nbsp;&nbsp;&nbsp;&nbsp;  
   
    
       <span class="glyphicon glyphicon-time">{{ comment.submit_date|date:"Y-m-d H:i"}}</span>  &nbsp;&nbsp;&nbsp;&nbsp;评论
@@ -73,9 +73,8 @@
     {% endifequal %}
 
 
-            <span class="reply_comment" style="float:right;" id="{{ comment.user_name }}">
-            <a href="#newcomment">
-              <button class="btn btn-info" onClick="addtext()">回复</button></a>
+            <span class="reply_comment" style="float:right;" >
+            <a href="#newcomment"; class = "reply_user" username="{{comment.user_name}}">回复</a>
             </span>
 
             </div>
@@ -118,12 +117,17 @@
             </div>  -->
 
 <script language="javascript">
+//添加用户回复
+   // function addtext(username){
+   //    var ta = document.getElementById("id_comment");
+   //    ta.value = "@" + username + "  ";
+   //    }
 
-   function addtext(){
-      var ta = document.getElementById("id_comment");
-      var username = document.getElementById("userName").innerTEXT;
-      ta.value = "@" + "  ";
-      }
+   $(".reply_user").click(function(){
+    var text = "@" + $(this).attr("username") + " ";
+    $("#id_comment").val(text);
+
+   });
 </script>
 
             <a name="newcomment" id="newcomment"></a>
@@ -131,8 +135,7 @@
               <label class="control-label" for="id_comment"><span class="label label-default">评论 : </span>
               </label>
               <div class="controls">
-                <textarea rows="5" cols="65" class="input-xlarge comment" id="id_comment" name="comment" placeholder="请输入评论内容">
-                </textarea>
+                <textarea rows="5" cols="65" class="input-xlarge comment" value="" id="id_comment" name="comment" placeholder="请输入评论内容"></textarea>
               </div>
             </div>
             <p style="display:none;"><label for="id_honeypot">如果你在该字段中输入任何内容，你的评论就会被视为垃圾评论。</label> <input type="text" name="honeypot" id="id_honeypot"></p>
