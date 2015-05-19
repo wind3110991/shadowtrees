@@ -1,15 +1,15 @@
 # shadowtrees
-www.shadowtrees.com
 
-基于python的Django框架做的博客系统shadowtrees，大家可以登陆我的网站：
+
+###基于python的Django框架做的博客系统shadowtrees，大家可以登陆我的网站：
 
 http://www.shadowtrees.com/
 
-前端使用用了bootstap框架优化，以及css3技术
+###前端使用用了bootstap框架优化，以及css3技术
 
-后台服务器语言为python
+###后台服务器语言为python
 
-部署方案:SAE
+###部署方案:SAE
 
 参照SAE 文档中心 v1.0
 
@@ -78,7 +78,7 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 10485760
 DEFAULT_FILE_STORAGE = 'sae.ext.django.storage.backend.Storage'
 ```
 
-# 使用media这个bucket
+### 使用media这个bucket
 STORAGE_BUCKET_NAME = 'media'
 ### ref: https://docs.djangoproject.com/en/dev/topics/files/
 发送邮件
