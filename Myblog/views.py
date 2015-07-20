@@ -50,7 +50,7 @@ def blog_search(request):
     except Blog.DoesNotExit:
         raise Http404
     blogs = []
-    return render_to_response('index.html', {"blogs": blogs,"blog_count":0}, context_instance=RequestContext(request))  
+    return render_to_response('index.html', {"blogs": blogs, "blog_count":0}, context_instance=RequestContext(request))  
 
 def blog_favor(request):
     id = request.GET.get('id','')
