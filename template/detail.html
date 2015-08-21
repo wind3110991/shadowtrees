@@ -8,53 +8,76 @@
 {% block content_body %}
 
 
- <!--博文页面-->
-
+ <!--博文详细页面-->
   <div class="content-main">
       <div class="blog_title"></div>
+        <div class="dropdown">
+          <h1>
+            <span class="label label-default">{{ blog.caption }}
+            </span>
+          </h1>
+  <hr/>
+  
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+              <FONT style="FONT-SIZE: 10pt; FONT-FAMILY: 微软雅黑,">本文</FONT>
+                <span class="caret"></span>
+            </button>
 
-<div class="dropdown"><h1><span class="label label-default">{{ blog.caption }}</span></h1>
-   <hr/>
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-    <FONT style="FONT-SIZE: 10pt; FONT-FAMILY: 微软雅黑,">本文</FONT>
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">收藏<span class="glyphicon glyphicon-heart"></span></a></li>
-    <li role="presentation"><a id="transfer" role="menuitem" tabindex="-1" href="#" onBlur="shareIt()">转发<span class="glyphicon glyphicon-share"></a></li>
-    <li role="presentation" ><a role="menuitem" tabindex="-1" href="/blog_favor/?id={{ blog.id }}" onBlur=favor()>赞一个～<span class="glyphicon glyphicon-hand-right" ></span></a></li>
-  </ul>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation">
+                  <a role="menuitem" tabindex="-1" href="#">收藏
+                    <span class="glyphicon glyphicon-heart"></span>
+                  </a>
+                </li>
+          
+                <li role="presentation">
+                  <a id="transfer" role="menuitem" tabindex="-1" href="#" onBlur="shareIt()">转发
+                    <span class="glyphicon glyphicon-share"></span>
+                  </a>
+                </li>
 
-  <span class="glyphicon glyphicon-folder-open"> 分类:<a href="#">{{ blog.classification }}</a>
-  </span>
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <span class="glyphicon glyphicon-user"> 作者:<a data-toggle="modal" data-target="userInfo" href=""  data-toggle="tooltip" data-placement="top" title="讨厌～偷看人家的隐私了la～" >{{ blog.author }}</a>
-  </span>
+                <li role="presentation" >
+                  <a role="menuitem" tabindex="-1" href="/blog_favor/?id={{ blog.id }}" onBlur=favor()>赞一个～
+                    <span class="glyphicon glyphicon-hand-right" ></span>
+                  </a>
+                </li>
+              </ul>
+        
+            <span class="glyphicon glyphicon-folder-open"> 分类:
+              <a href="#">{{ blog.classification }}</a>
+            </span>
 
-</div>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="glyphicon glyphicon-user"> 作者:
+              <a data-toggle="modal" data-target="userInfo" href=""  data-toggle="tooltip" data-placement="top" title="讨厌～偷看人家的隐私了la～" >{{ blog.author }}
+              </a>
+            </span>
+          </div>
 
 {%include "userInfo.html"%}
       <div class="blog_info1">
-        <span class="blog_info1_list">
-          
-        </br>
+        <span class="blog_info1_list">         
+</br>
           <span class="glyphicon glyphicon-time"> 发表时间：{{ blog.publish_time|date:"Y-m-d H:i" }}</span>
         </span>
       </div>
+      
       <div class="blog_splitline"></div>
+
 <br/>
-<br/><br/>
+<br/>
+<br/>
+
       <div class="panel panel-default">
-  <div class="panel-body">
-      <div class="blog_description"><FONT style="FONT-SIZE: 13pt; FONT-FAMILY: 微软雅黑,">
-        
-        {{ blog.content|safe }}
-
-      </FONT>
-</div>
-
-</div>
+        <div class="panel-body">
+            <div class="blog_description">
+              <FONT style="FONT-SIZE: 13pt; FONT-FAMILY: 微软雅黑,">
+              {{ blog.content|safe }}
+              </FONT>
+            </div>
+          </div>
       </div>
+      
   </div>
     <!--博文页面 end-->
 </br></br></br></br></br></br>
