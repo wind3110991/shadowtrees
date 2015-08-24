@@ -9,29 +9,32 @@ import re
 from itertools import chain
 import simplejson
 
-def welcome(request):
+def show_welcome_page(request):
     return render_to_response('welcome.html')
 
-def more(request):
+def show_more_page(request):
     return render_to_response('more.html')
 
-def about(request):
+def show_about_page(request):
     return render_to_response('aboutme.html')
 
-def home(request):
+def show_home_page(request):
     return render_to_response('home.html')
 
+def show_contact_page(request):
+    return render_to_response('contact.html')
+
 def blog_list(request): 
-    blog_list=Blog.objects.all().order_by('-publish_time')
-    paginator=Paginator(blog_list,8)#分页处理
-    page=request.GET.get('page')
+    blog_list = Blog.objects.all().order_by('-publish_time')
+    paginator = Paginator(blog_list,8)#分页处理
+    page = request.GET.get('page')
     try:
-        blogs=paginator.page(page)
+        blogs = paginator.page(page)
     except PageNotAnInteger:
-        blogs=paginator.page(1)
+        blogs = paginator.page(1)
     except EmptyPage:
-        blogs=paginator.page(paginator.num_pages)    
-    return render_to_response('index.html', {"blogs": blogs}, context_instance=RequestContext(request))
+        blogs = paginator.page(paginator.num_pages)    
+    return render_to_response('index.html', {"blogs": blogs}, context_instance = RequestContext(request))
 
 @csrf_exempt
 def blog_search(request):
@@ -42,11 +45,12 @@ def blog_search(request):
             if search_content != '':    
                 tempCaption = lookup.caption
                 tempContent = lookup.content
-                matchCaption = re.search(search_content,tempCaption)
-                matchContent = re.search(search_content,tempContent)
+                matchCaption = re.search(search_content, tempCaption)
+                matchContent = re.search(search_content, tempContent)
                 if matchContent or matchCaption:
-                    blogs = Blog.objects.filter(caption=tempCaption)    
+                    blogs = Blog.objects.filter(caption = tempCaption)    
                     return render_to_response('index.html', {"blogs": blogs}, context_instance=RequestContext(request))          
+    
     except Blog.DoesNotExit:
         raise Http404
     blogs = []
