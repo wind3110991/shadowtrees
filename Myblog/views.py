@@ -26,7 +26,7 @@ def show_contact_page(request):
 
 def blog_list(request): 
     blog_list = Blog.objects.all().order_by('-publish_time')
-    paginator = Paginator(blog_list,8)#分页处理
+    paginator = Paginator(blog_list, 8)#分页处理
     page = request.GET.get('page')
     try:
         blogs = paginator.page(page)
@@ -36,11 +36,15 @@ def blog_list(request):
         blogs = paginator.page(paginator.num_pages)    
     return render_to_response('index.html', {"blogs": blogs}, context_instance = RequestContext(request))
 
+
 @csrf_exempt
+
 def blog_search(request):
     try:
         allblog = Blog.objects.all().order_by('caption')
         search_content = request.GET.get('search_content','')
+
+        blogs = []
         for lookup in allblog:
             if search_content != '':    
                 tempCaption = lookup.caption
@@ -48,20 +52,24 @@ def blog_search(request):
                 matchCaption = re.search(search_content, tempCaption)
                 matchContent = re.search(search_content, tempContent)
                 if matchContent or matchCaption:
-                    blogs = Blog.objects.filter(caption = tempCaption)    
-                    return render_to_response('index.html', {"blogs": blogs}, context_instance=RequestContext(request))          
+                    #blogs = Blog.objects.filter(caption = tempCaption)
+                    blogs.append(Blog.objects.get(caption = tempCaption))   
+        return render_to_response('index.html', {"blogs": blogs}, context_instance = RequestContext(request))          
     
     except Blog.DoesNotExit:
         raise Http404
+
     blogs = []
-    return render_to_response('index.html', {"blogs": blogs, "blog_count":0}, context_instance=RequestContext(request))  
+    return render_to_response('index.html', {"blogs": blogs, "blog_count":0}, context_instance = RequestContext(request))  
 
 def blog_favor(request):
     id = request.GET.get('id','')
+
     try:
-        blog = Blog.objects.get(id=id)
+        blog = Blog.objects.get(id = id)
         blog.markCount = blog.markCount + 1     
         blog.save()
+    
     except:
         raise Http404()
     return render_to_response("detail.html", {"blog": blog}, context_instance=RequestContext(request))
@@ -75,8 +83,10 @@ def blog_detail(request):
             readingCount = blog.counts+1
             blog.counts = readingCount
             blog.save()
+
         except Blog.DoesNotExist:
             raise Http404
+
         return render_to_response("detail.html", {"blog": blog}, context_instance=RequestContext(request))
     else:
         raise Http404
@@ -87,5 +97,6 @@ def tag(request,id=''):
     blogs=cut_tag.blog_set.all()
     tags=Tag.objects.all()
     classifications=Classification.objects.all()
+
     return render_to_response("blog_list.html",{"blogs":blogs,"classifications":classifications,
 "tags":tags})
