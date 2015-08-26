@@ -28,6 +28,7 @@ def blog_list(request):
     blog_list = Blog.objects.all().order_by('-publish_time')
     paginator = Paginator(blog_list, 8)#分页处理
     page = request.GET.get('page')
+
     try:
         blogs = paginator.page(page)
     except PageNotAnInteger:
@@ -93,10 +94,9 @@ def blog_detail(request):
 
 
 def tag(request,id=''):
-    cut_tag=Tag.objects.gei(id=id)
-    blogs=cut_tag.blog_set.all()
-    tags=Tag.objects.all()
-    classifications=Classification.objects.all()
+    cut_tag = Tag.objects.gei(id=id)
+    blogs = cut_tag.blog_set.all()
+    tags = Tag.objects.all()
+    classifications = Classification.objects.all()
 
-    return render_to_response("blog_list.html",{"blogs":blogs,"classifications":classifications,
-"tags":tags})
+    return render_to_response("blog_list.html", {"blogs":blogs, "classifications":classifications, "tags":tags})

@@ -2,6 +2,18 @@
 {% load comments %}
 {% block content_body %} 
 
+<style type="text/css">
+  body {
+   
+    background:url(/static/img/test1.png);
+  }
+</style>
+
+<!--添加panel-->
+      <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="blog_description">
+<!--添加panel-->
 
 <div class="row">
   <div class ="col-sm-6">
@@ -24,7 +36,9 @@
 </div>
 
 
-<h2 style="font-size:25px"><span class="glyphicon glyphicon-pencil">最新博文</span></h2>
+<h2 style="font-size:25px">
+  <span class="glyphicon glyphicon-pencil">最新博文</span>
+</h2>
 <hr/>
 
 
@@ -45,21 +59,19 @@
 
       {% get_comment_count for blog as comment_count %}
 
-
 <table>
   <tr>
     <td>
-      <img 
-      src="/static/img/me.jpg" alt="你网速也太慢了吧～" style="width: 120px; left: 200px; height: 120px; display: block; top: 171px;" />
+      <img src="/static/img/me.jpg" alt="你网速也太慢了吧～" style="width: 100px;  height: 100px;" />
     </td>
     
     <td style="font-size:22px">
       <div class="blog_body">
         <div class ="blog_title">
 
-          <p align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <span class="glyphicon glyphicon-send" style="color:black"><a style="color:black;text-decoration:none;" href="/blog_detail/?id={{ blog.id }}" data-toggle="tooltip" data-placement="top" title="点击查看该文章～" >   {{ blog.caption }}</a>
-            </span>
+          <p align="center" style="font-size:18px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a style="color:black;text-decoration:none;" href="/blog_detail/?id={{ blog.id }}" data-toggle="tooltip" data-placement="top" title="点击查看该文章～" >   {{ blog.caption }}
+              </a>
           </p>
             
         </div>
@@ -73,16 +85,15 @@
                     <span class="glyphicon glyphicon-tags">  标签：
                   {% for tag in blog.tags.all %} {{ tag.tag_name }}&nbsp;
 
-                {% endfor %} 
+                  {% endfor %} 
 
-                      <span class="glyphicon glyphicon-folder-open">分类:&nbsp;{{ blog.classification }}</span>
+                      <span class="glyphicon glyphicon-folder-open">&nbsp;分类:&nbsp;{{ blog.classification }}</span>
                    
                     </span>
                 </p>
           </div>
     </td>
 
-<br/>
 
     <div class="blog_splitline"></div> 
       <div class="highlight">
@@ -108,24 +119,24 @@
       <span class="glyphicon glyphicon-time">发表时间：{{ blog.publish_time|date:"Y-m-d H:i" }}</span>
     </span>
 
-  <p align="right">
-
-    <span class="glyphicon glyphicon-eye-open" style="color:#878787">阅读<span class="badge">{{ blog.counts }}
+    <p align="right">
+      <span class="glyphicon glyphicon-eye-open" style="color:#878787">阅读<span class="badge">{{ blog.counts }}
+        </span>
       </span>
-    </span>
               &nbsp;&nbsp;&nbsp;
-    <span style="color:#878787" class="glyphicon glyphicon-thumbs-up">赞<span class="badge">{{ blog.markCount}}
+      <span style="color:#878787" class="glyphicon glyphicon-thumbs-up">赞<span class="badge">{{ blog.markCount}}
         </span>
-    </span>
+      </span>
               &nbsp;&nbsp;&nbsp;
-    <span style="color:#878787" class="glyphicon glyphicon-comment">评论<span class="badge">{{ comment_count }}
+      <span style="color:#878787" class="glyphicon glyphicon-comment">评论<span class="badge">{{ comment_count }}
         </span>
-    </span>
-
+      </span>
   </p>
 
- <hr/>
   
+  <hr/>
+
+
 {% endfor %}
 
 {% endifequal %}            
@@ -133,7 +144,12 @@
 </div>
 
 
-{% include "page.html" %}
-  
+      {% include "page.html" %}
+      
+      <!--添加panel end-->
+      </div>
+    </div>
+</div>
+      <!--添加panel end-->
 
 {% endblock %}
