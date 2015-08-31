@@ -6,18 +6,33 @@
 {% load comments %}
             
 {% block content_body %}
-
+<style type="text/css">
+  body{ 
+    background:url(/static/img/backtest.png);
+  }
+</style>
 
  <!--博文详细页面-->
   <div class="content-main">
-      <div class="blog_title"></div>
-        <div class="dropdown">
+      <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="blog_description">
+              <div class="blog_title"></div>
+                  <div class="dropdown">
+
+          <a href="/" style="color: #666666">首页</a> > 
+          <a href="/blog" style="color: #666666">博客</a> >
+          <a href="/blog_classify/?classification={{ blog.classification }}" style="color: #666666">{{ blog.classification }}
+          </a>
+
           <h1>
             <span class="label label-default">{{ blog.caption }}
             </span>
           </h1>
-  <hr/>
-  
+
+          <hr/>
+
+
             <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
               <FONT style="FONT-SIZE: 10pt; FONT-FAMILY: 微软雅黑,">本文</FONT>
                 <span class="caret"></span>
@@ -43,13 +58,13 @@
                 </li>
               </ul>
         
-            <span class="glyphicon glyphicon-folder-open"> 分类:
-              <a href="#">{{ blog.classification }}</a>
-            </span>
+<!--             <span class="glyphicon glyphicon-folder-open"> 分类:
+              <a href="#" style="color: #666666">{{ blog.classification }}</a>
+            </span> -->
 
             &nbsp;&nbsp;&nbsp;&nbsp;
             <span class="glyphicon glyphicon-user"> 作者:
-              <a data-toggle="modal" data-target="userInfo" href=""  data-toggle="tooltip" data-placement="top" title="讨厌～偷看人家的隐私了la～" >{{ blog.author }}
+              <a data-toggle="modal" data-target="#myInfo" href=""  data-toggle="tooltip" data-placement="top"  style="color: #666666">{{ blog.author }}
               </a>
             </span>
           </div>
@@ -63,14 +78,9 @@
       </div>
       
       <div class="blog_splitline"></div>
+<hr/>
+<br/><br/><br/>
 
-<br/>
-<br/>
-<br/>
-
-      <div class="panel panel-default">
-        <div class="panel-body">
-            <div class="blog_description">
               <FONT style="FONT-SIZE: 13pt; FONT-FAMILY: 微软雅黑,">
               {{ blog.content|safe }}
               </FONT>
@@ -80,7 +90,6 @@
       
   </div>
     <!--博文页面 end-->
-</br></br></br></br></br></br>
 </br></br></br></br></br></br>
 
 <hr/>

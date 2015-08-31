@@ -49,6 +49,11 @@
   
    
                 <span class="glyphicon glyphicon-time">{{ comment.submit_date|date:"Y-m-d H:i"}}</span>  &nbsp;&nbsp;&nbsp;&nbsp;评论
+
+                <span class="reply_comment" style="float:right;" >
+                    <a href="#newcomment"; class = "reply_user" username="{{comment.user_name}}">回复</a>
+                </span>
+
                   </div>
 
                   <div class="panel-body">
@@ -73,6 +78,10 @@
                   <a>{{ comment.user_name }}</a>&nbsp;&nbsp;&nbsp;&nbsp;  
                       <span class="glyphicon glyphicon-time">{{ comment.submit_date|date:"Y-m-d H:i"}}
                       </span>  &nbsp;&nbsp;&nbsp;&nbsp;评论
+
+                      <span class="reply_comment" style="float:right;" >
+                        <a href="#newcomment"; class = "reply_user" username="{{comment.user_name}}">回复</a>
+                      </span>
                 </div>
   
                 <div class="panel-body">
@@ -88,21 +97,13 @@
                     </tr>
                   </table>
                 </div>
-
             </div>  
 
           {% endifequal %}
 
-
-      <span class="reply_comment" style="float:right;" >
-        <a href="#newcomment"; class = "reply_user" username="{{comment.user_name}}">回复</a>
-      </span>
-
   </div>
 
 <!--结束comment部分-->
-
-<hr/>
 
       {% endfor %}
       {% endifequal %}
@@ -178,7 +179,7 @@
 
             <div class="controls">
               <div class="form-actions">
-                <input class="btn btn-info" id="submit_btn" type="submit" name="submit" value="评论"/>
+                <input class="btn btn-success" id="submit_btn" type="submit" name="submit" value="评论"/>
                 <input type="hidden" name="next" value="/blog_detail/?id={{ blog.id }}"/>
               </div>
             </div>

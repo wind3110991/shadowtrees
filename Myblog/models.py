@@ -4,24 +4,22 @@ from django.db.models import permalink
 from markdown import markdown
 # Create your models here.
 class Classification(models.Model): # 分类表
-
     name = models.CharField(max_length=20)
  #   slug = models.CharField(max_length=50,unique=True)
-
     def __unicode__(self):
         return self.name
 
-    @permalink
-    def get_absolute_url(self):
-        return ('blog_category',None,{'slug':self.slug})
+    #@permalink
+    #def get_absolute_url(self):
+    #    return ('blog_category', None, {'slug':self.slug})
 
-    class Meta:
-        ordering = ['id']
+    # class Meta:
+    #     ordering = ['id']
    #     verbose_name_plural = verbose_name = u'分类'
 
-class Tag(models.Model): # 标签表
+class Tag(models.Model):# 标签表
 
-    tag_name = models.CharField(max_length=20,blank=True)
+    tag_name = models.CharField(max_length=20, blank=True)
     create_time = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
@@ -47,19 +45,19 @@ class Blog(models.Model): # 文章表
     publish_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
     counts = models.IntegerField(default=0)
-    author=models.ForeignKey(Author)
+    author = models.ForeignKey(Author)
     classification = models.ForeignKey(Classification)
 
-#    def __unicode__(self):
- #       return u'%s %s' % (self.caption,self.publish_time)
+    def __unicode__(self):
+        return u'%s %s' % (self.caption,self.publish_time,self.classification)
 
-#    @permalink
-#    def get_absolute_url(self):
- #       return ('blog_article',None,{'slug':self.slug})
+    @permalink
+    def get_absolute_url(self):
+        return ('blog_article',None,{'slug':self.slug})
 
     class Meta:
         get_latest_by = 'publish_time'
-        ordering = ['-id'] #按照后输入的id号排在前面
+        ordering = ['-id']#按照后输入的id号排在前面
  #       verbose_name_plural = verbose_name = u'文章'
 
 #class ClientInfo(models.Model):

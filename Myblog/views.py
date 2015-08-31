@@ -8,6 +8,10 @@ from django.views.decorators.csrf import csrf_exempt
 import re
 from itertools import chain
 import simplejson
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 
 def show_welcome_page(request):
     return render_to_response('welcome.html')
@@ -24,8 +28,11 @@ def show_home_page(request):
 def show_contact_page(request):
     return render_to_response('contact.html')
 
-def blog_list(request): 
+def blog_list(request):
     blog_list = Blog.objects.all().order_by('-publish_time')
+    if request.GET.get('list_by') == 'read':
+        blog_list = Blog.objects.all().order_by('-counts')
+    
     paginator = Paginator(blog_list, 8)#分页处理
     page = request.GET.get('page')
 
@@ -35,8 +42,20 @@ def blog_list(request):
         blogs = paginator.page(1)
     except EmptyPage:
         blogs = paginator.page(paginator.num_pages)    
-    return render_to_response('index.html', {"blogs": blogs}, context_instance = RequestContext(request))
+    return render_to_response('index.html', {"blogs": blogs}, context_instance=RequestContext(request))
 
+# def blog_list_by_read(request):
+#     blog_list = Blog.objects.all().order_by('-count')
+#     paginator = Paginator(blog_list, 8)#分页处理
+#     page = request.GET.get('page')
+
+#     try:
+#         blogs = paginator.page(page)
+#     except PageNotAnInteger:
+#         blogs = paginator.page(1)
+#     except EmptyPage:
+#         blogs = paginator.page(paginator.num_pages)    
+#     return render_to_response('index.html', {"blogs": blogs}, context_instance=RequestContext(request))
 
 @csrf_exempt
 
@@ -47,27 +66,48 @@ def blog_search(request):
 
         blogs = []
         for lookup in allblog:
-            if search_content != '':    
+            if search_content != '':
                 tempCaption = lookup.caption
                 tempContent = lookup.content
                 matchCaption = re.search(search_content, tempCaption)
                 matchContent = re.search(search_content, tempContent)
                 if matchContent or matchCaption:
                     #blogs = Blog.objects.filter(caption = tempCaption)
-                    blogs.append(Blog.objects.get(caption = tempCaption))   
-        return render_to_response('index.html', {"blogs": blogs}, context_instance = RequestContext(request))          
+                    blogs.append(Blog.objects.get(caption=tempCaption))  
+        return render_to_response('index.html', {"blogs": blogs}, context_instance=RequestContext(request))          
     
     except Blog.DoesNotExit:
         raise Http404
 
     blogs = []
-    return render_to_response('index.html', {"blogs": blogs, "blog_count":0}, context_instance = RequestContext(request))  
+    return render_to_response('index.html', {"blogs": blogs, "blog_count":0}, context_instance=RequestContext(request))  
+
+def blog_classify(request):
+    allblog = Blog.objects.all().order_by('caption')
+    if request.method == 'GET':
+        classification = request.GET.get('classification','')
+    #     tmp = classification.encode('UTF-8')
+    #     print tmp
+    #     tmp1 = tmp.decode('UTF-8')
+    #     blogs = Blog.objects.filter(classification=tmp1)
+        blogs = []
+        for lookup in allblog:
+            if classification != '':
+                tempClassification = str(lookup.classification)
+
+                if tempClassification == classification:
+                    #blogs = Blog.objects.filter(caption = tempCaption)
+                    blogs.append(lookup)
+        return render_to_response('index.html', {"blogs": blogs}, context_instance=RequestContext(request))    
+
+    #except Blog.DoesNotExit:
+    #    raise Http404
 
 def blog_favor(request):
     id = request.GET.get('id','')
 
     try:
-        blog = Blog.objects.get(id = id)
+        blog = Blog.objects.get(id=id)
         blog.markCount = blog.markCount + 1     
         blog.save()
     

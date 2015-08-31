@@ -3,17 +3,46 @@
 {% block content_body %} 
 
 <style type="text/css">
-  body {
-   
-    background:url(/static/img/test1.png);
+  body{ 
+    background:url(/static/img/backt.png);
   }
 </style>
 
 <!--添加panel-->
       <div class="panel panel-default">
+        <div class="panel">
+          <ul class="nav nav-pills" role="tablist">
+            <li role="presentation">
+              <a href="/blog_classify/?classification=python" style="color: #2E8B57">python</a>
+            </li>
+            <li role="presentation"><a href="/blog_classify/?classification=杂说" style="color: #2E8B57">杂说</a>
+            </li>
+            <li role="presentation"><a href="/blog_classify/?classification=Linux" style="color: #2E8B57">Linux</a>
+            </li>
+            <li role="presentation"><a href="/blog_classify/?classification=面试" style="color: #2E8B57">面试</a>
+            </li>
+            <li role="presentation"><a href="/blog_classify/?classification=技术" style="color: #2E8B57">技术</a>
+            </li>
+            <li role="presentation"><a href="/blog_classify/?classification=后台" style="color: #2E8B57">后台</a>
+            </li>
+            <li role="presentation"><a href="/blog_classify/?classification=django" style="color: #2E8B57">django</a>
+            </li>
+            <li role="presentation"><a href="/blog_classify/?classification=生活" style="color: #2E8B57">生活</a>
+            </li>
+            <li role="presentation"><a href="/blog_classify/?classification=工作" style="color: #2E8B57">工作</a>
+            </li>
+            <li role="presentation"><a href="/blog_classify/?classification=动漫" style="color: #2E8B57">动漫</a>
+            </li>
+            <li role="presentation"><a href="/blog_classify/?classification=创意" style="color: #2E8B57">创意</a>
+            </li>
+          </ul>
+        </div>
+
         <div class="panel-body">
             <div class="blog_description">
 <!--添加panel-->
+              <a href="/" style="color: #666666">首页</a> > 
+              <a href="/blog" style="color: #666666">博客</a>
 
 <div class="row">
   <div class ="col-sm-6">
@@ -21,6 +50,17 @@
       <tr>
         <form action ="/blog_search/?=" method="get">
           <p>
+            <td>
+              <div class="dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">文章排序
+                    <span class="caret"></span>
+                  </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                      <li><a href="/blog">按日期</a></li>
+                      <li><a href="/blog/?list_by=read">按阅读量</a></li>
+                    </ul>
+              </div>
+            </td>
             <td>
               <input  type="text" class="form-control" placeholder="输入你寻找的内容" name="search_content">
             </td>
@@ -36,9 +76,6 @@
 </div>
 
 
-<h2 style="font-size:25px">
-  <span class="glyphicon glyphicon-pencil">最新博文</span>
-</h2>
 <hr/>
 
 
