@@ -5,6 +5,7 @@
 <style type="text/css">
   body{ 
     background:url(/static/img/backt.png);
+    
   }
 </style>
 
@@ -58,11 +59,16 @@
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                       <li><a href="/blog">按日期</a></li>
                       <li><a href="/blog/?list_by=read">按阅读量</a></li>
+                      <li><a href="/blog/?list_by=classification">按分类</a></li>
                     </ul>
               </div>
             </td>
             <td>
               <input  type="text" class="form-control" placeholder="输入你寻找的内容" name="search_content">
+<!--                   <div style="width:200px;height:50px;">
+                    <input required='' type='text' class="form-control" name="search_content">
+                    <label alt='请输入搜索内容' placeholder='名称'></label>
+                  </div> -->
             </td>
       
             <td>
@@ -74,7 +80,6 @@
     </table>
   </div>
 </div>
-
 
 <hr/>
 

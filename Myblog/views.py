@@ -28,11 +28,19 @@ def show_home_page(request):
 def show_contact_page(request):
     return render_to_response('contact.html')
 
+def show_cloud_page(request):
+    return render_to_response('cloud.html')
+
+def show_404_page(request):
+    return render_to_response('404.html')
+
 def blog_list(request):
     blog_list = Blog.objects.all().order_by('-publish_time')
     if request.GET.get('list_by') == 'read':
         blog_list = Blog.objects.all().order_by('-counts')
-    
+    elif request.GET.get('list_by') == 'classification':
+        blog_list = Blog.objects.all().order_by('classification')
+
     paginator = Paginator(blog_list, 8)#分页处理
     page = request.GET.get('page')
 
@@ -75,9 +83,10 @@ def blog_search(request):
                     #blogs = Blog.objects.filter(caption = tempCaption)
                     blogs.append(Blog.objects.get(caption=tempCaption))  
         return render_to_response('index.html', {"blogs": blogs}, context_instance=RequestContext(request))          
-    
-    except Blog.DoesNotExit:
-        raise Http404
+    except:
+        render_to_response('404.html', context_instance=RequestContext(request))
+    # except Blog.DoesNotExit:
+    #     raise Http404
 
     blogs = []
     return render_to_response('index.html', {"blogs": blogs, "blog_count":0}, context_instance=RequestContext(request))  
@@ -85,21 +94,23 @@ def blog_search(request):
 def blog_classify(request):
     allblog = Blog.objects.all().order_by('caption')
     if request.method == 'GET':
-        classification = request.GET.get('classification','')
-    #     tmp = classification.encode('UTF-8')
-    #     print tmp
-    #     tmp1 = tmp.decode('UTF-8')
-    #     blogs = Blog.objects.filter(classification=tmp1)
-        blogs = []
-        for lookup in allblog:
-            if classification != '':
-                tempClassification = str(lookup.classification)
+        try:
+            classification = request.GET.get('classification','')
+        #     tmp = classification.encode('UTF-8')
+        #     print tmp
+        #     tmp1 = tmp.decode('UTF-8')
+        #     blogs = Blog.objects.filter(classification=tmp1)
+            blogs = []
+            for lookup in allblog:
+                if classification != '':
+                    tempClassification = str(lookup.classification)
 
-                if tempClassification == classification:
-                    #blogs = Blog.objects.filter(caption = tempCaption)
-                    blogs.append(lookup)
-        return render_to_response('index.html', {"blogs": blogs}, context_instance=RequestContext(request))    
-
+                    if tempClassification == classification:
+                        #blogs = Blog.objects.filter(caption = tempCaption)
+                        blogs.append(lookup)
+            return render_to_response('index.html', {"blogs": blogs}, context_instance=RequestContext(request))    
+        except:
+            render_to_response('404.html', context_instance=RequestContext(request))
     #except Blog.DoesNotExit:
     #    raise Http404
 
@@ -112,7 +123,8 @@ def blog_favor(request):
         blog.save()
     
     except:
-        raise Http404()
+        render_to_response('404.html', context_instance=RequestContext(request))
+        #raise Http404()
     return render_to_response("detail.html", {"blog": blog}, context_instance=RequestContext(request))
   
 
@@ -130,7 +142,8 @@ def blog_detail(request):
 
         return render_to_response("detail.html", {"blog": blog}, context_instance=RequestContext(request))
     else:
-        raise Http404
+        render_to_response('404.html', context_instance=RequestContext(request))
+        #raise Http404
 
 
 def tag(request,id=''):

@@ -16,6 +16,8 @@ urlpatterns = patterns('',
     url(r'^contact/', 'Myblog.views.show_contact_page',name='contact'),
     url(r'^about/','Myblog.views.show_about_page',name='contact'),#跳转到作者页面
 
+    url(r'^cloud/', 'Myblog.views.show_cloud_page',name='cloud'),
+    url(r'^404/', 'Myblog.views.show_404_page',name='404'),
     url(r'^blog/', 'Myblog.views.blog_list',name='blog_list'),
     url(r'^blog_favor/', 'Myblog.views.blog_favor',name='blog_favor'),
     url(r'^comments/',include('django.contrib.comments.urls')),
