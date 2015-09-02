@@ -1,7 +1,7 @@
 {% load comments %}
 
 <div class="comments">
-      <a name="blog_comments" id="comments"></a>
+      <!-- <a name="blog_comments" id="comments"></a> -->
       {% get_comment_count for blog as comment_count %}
 
       <div class="comments_nav">
@@ -11,7 +11,7 @@
               &nbsp;&nbsp;&nbsp;
             
         <span style="color:#878787" class="glyphicon glyphicon-thumbs-up">赞
-          <span class="badge">{{blog.markCount}}</span>
+          <span class="badge">{{ blog.markCount }}</span>
         </span>
               &nbsp;&nbsp;&nbsp;
         <span style="color:#878787" class="glyphicon glyphicon-comment">评论
@@ -19,7 +19,7 @@
         </span>
       </div>
 
-<br/><br/>
+      <br/><br/>
 
       {% ifequal comment_count 0 %}
         
@@ -29,46 +29,41 @@
               <small align="center" style="font-size:16px">This tree hasn't got any shadow yet～</small>
             </h1>
         </div>
+      </div>
 
       {% else %}
 
         {% get_comment_list for blog as comments %}
 
         <div class="comments_body">
+
             {% for comment in comments %}
             <div class="comment_container">
-              <div class="comment_id"></div>
                 
               {% ifequal comment.user_email '312456073@qq.com' %}
         
               <div class="panel panel-default">
                   <div id="userName" class="panel-heading">
     
-                    <a>{{ comment.user_name }}  </a>
+                    <a data-toggle="modal" data-target="#myInfo">{{ comment.user_name }}  </a>
                     <img src="/static/img/mod.png" width="30" height="14"/> &nbsp;&nbsp;&nbsp;&nbsp;  
   
-   
-                <span class="glyphicon glyphicon-time">{{ comment.submit_date|date:"Y-m-d H:i"}}</span>  &nbsp;&nbsp;&nbsp;&nbsp;评论
-
-                <span class="reply_comment" style="float:right;" >
-                    <a href="#newcomment"; class = "reply_user" username="{{comment.user_name}}">回复</a>
-                </span>
+                    <span class="glyphicon glyphicon-time">{{ comment.submit_date|date:"Y-m-d H:i"}}</span>  &nbsp;&nbsp;&nbsp;&nbsp;评论
 
                   </div>
 
-                  <div class="panel-body">
+                    <div class="panel-body">
                     <table>
                         <tr>
                           <a href="{{ comment.user_url }}">
-                            <td><img src="/static/img/client.jpg" width="80" height="90" />
+                            <td><img src="/static/img/owner.jpg" width="90" height="90" />
                           </a>
                             </td>
          &nbsp;&nbsp;
                             <td>{{ comment.comment }}</td>
                         </tr>
                     </table>
-                  </div>
-
+                    </div>
               </div>  
 
               {% else %}
@@ -78,10 +73,6 @@
                   <a>{{ comment.user_name }}</a>&nbsp;&nbsp;&nbsp;&nbsp;  
                       <span class="glyphicon glyphicon-time">{{ comment.submit_date|date:"Y-m-d H:i"}}
                       </span>  &nbsp;&nbsp;&nbsp;&nbsp;评论
-
-                      <span class="reply_comment" style="float:right;" >
-                        <a href="#newcomment"; class = "reply_user" username="{{comment.user_name}}">回复</a>
-                      </span>
                 </div>
   
                 <div class="panel-body">
@@ -98,15 +89,21 @@
                   </table>
                 </div>
             </div>  
-
-          {% endifequal %}
-
+          {% endifequal %} <!--结束判断博主-->
+<!--                       <span class="reply_comment" style="float:right;" >
+                        <a href="#newcomment"; class = "reply_user" username="{{comment.user_name}}">回复</a>
+                      </span> -->
+              <span class="reply_comment" style="float:right;" >
+                <a href="#newcomment"; class = "reply_user" username="{{comment.user_name}}">[回复Ta]</a>
+              </span>
+              <hr/>
   </div>
-
+</br></br>
 <!--结束comment部分-->
 
       {% endfor %}
-      {% endifequal %}
+    {% endifequal %}
+
 </div>
 
 </br>
@@ -146,7 +143,7 @@
 
             <div class="control-group">
               <label class="control-label" for="id_email">
-                  <span class="label label-default">E-mai : </span>
+                  <span class="label label-default">E-mail: </span>
               </label>
 
               <div class="controls">
@@ -164,7 +161,7 @@
           <a name="newcomment" id="newcomment"></a>
             <div class="control-group">
               <label class="control-label" for="id_comment">
-                <span class="label label-default">评论 : </span>
+                <span class="label label-default">评论: </span>
               </label>
 
               <div class="controls">
@@ -174,7 +171,7 @@
             </div>
 
           <p style="display:none;">
-            <label for="id_honeypot">如果你在该字段中输入任何内容，你的评论就会被视为垃圾评论。</label> <input type="text" name="honeypot" id="id_honeypot">
+            <label for="id_honeypot">如果你在该字段中输入任何内容，你的评论就会被视为垃圾评论。</label><input type="text" name="honeypot" id="id_honeypot">
           </p>
 
             <div class="controls">
@@ -189,6 +186,7 @@
         </div>
       </div>
 </div>
+
 <!-- 用户评论部分end -->
 
 <script language="javascript">

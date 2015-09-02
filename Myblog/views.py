@@ -41,7 +41,7 @@ def blog_list(request):
     elif request.GET.get('list_by') == 'classification':
         blog_list = Blog.objects.all().order_by('classification')
 
-    paginator = Paginator(blog_list, 8)#分页处理
+    paginator = Paginator(blog_list, 16)#分页处理
     page = request.GET.get('page')
 
     try:
