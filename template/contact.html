@@ -24,6 +24,13 @@
   <link rel="stylesheet" type="text/css" href="/static/css/css-photo/normalize.css" />
   <link rel="stylesheet" type="text/css" href="/static/css/css-photo/demo.css" />
   <link rel="stylesheet" type="text/css" href="/static/css/css-photo/component.css" />
+
+  <!--test-->
+    <link rel="stylesheet" type="text/css" href="/static/css/css-dialog/dialog.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/css-dialog/dialog-wilma.css" />
+    <script src="js/modernizr.custom.js"></script>
+  <!--test end-->
+
   <script>
   $(function () {
     $('.text1').textillate({ in: { effect: 'rollIn' } });
@@ -132,55 +139,16 @@
                 OR
                 <button style="background:#CD2626" data-effect="st-effect-9">fuck</button>
             </p>
+
         </div><!-- /st-pusher -->
+ 
+        {% include "photo.html" %}
+              <!--弹出框-->
+        {% include "diarticle.html" %}  
+        <!--弹出框end-->
       </div><!-- /st-pusher -->
     <script src="/static/js/js-photo/modernizr.custom.js"></script>
-  </head>
-  <body>
-    <div class="container">
-      <section class="grid-wrap">
-        <ul class="grid swipe-right" id="grid">
-          <li><a href=""><img src="/static/img/img-photo/1.jpg" alt="img01"><h3>1993.9 降临到这个世界</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/2.jpg" alt="img02"><h3>1995.4 学会了人生第一门语言</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/5.jpg" alt="img03"><h3>1997.9 Start To Go To school</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/4.jpg" alt="img04"><h3>2000 成为了一个小学生</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/3.jpg" alt="img05"><h3>2002 同学们都在看奥特曼时，我在思考EVA的结局</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/6.jpg" alt="img06">
-            <h3>2004.4 我达到了班主任厌恶的极限，写下了人生第20份检讨书</h3>
-          </a></li>
-          <li><a href=""><img src="/static/img/img-photo/1.jpg" alt="img01"><h3>2006.9 从小学滚蛋，从初中起家</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/2.jpg" alt="img02"><h3>2006.9 遇到了人生中第一个喜欢我的女孩</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/10.jpg" alt="img03"><h3>2008.3 第一个喜欢的人</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/4.jpg" alt="img04"><h3>2009.9 我在幸福的三年时光中，失落地离开了家乡</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/5.jpg" alt="img05"><h3>2010.2 初恋</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/6.jpg" alt="img06"><h3>2012.1 第一次认真地思考了下，我TM该读什么专业</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/4.jpg" alt="img06"><h3>2012.6 伴随着第一夜的失眠，被高考虐成渣</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/8.jpg" alt="img08"><h3>2012.7 被一所以前没听说过的985录取，开始了程序员的生涯</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/9.jpg" alt="img09"><h3>2012.9 用C++敲下人生第一句"Hello World!"</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/10.jpg" alt="img10"><h3>2012.11 Lost My Love</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/11.jpg" alt="img11"><h3>2013.1 Let's Rock it  组成人生第一支乐队</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/12.jpg" alt="img12"><h3>2013.7 学了下令人发指的objective-c</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/13.jpg" alt="img13"><h3>2013.9 邂逅</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/14.jpg" alt="img14"><h3>2014.1.1 Forever</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/1.jpg" alt="img01"><h3>2014.7 Story Box V2.0</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/2.jpg" alt="img02"><h3>2014.8 Python, Shall we?</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/3.jpg" alt="img03"><h3>2014.11 开始了shadowtrees的开发</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/4.jpg" alt="img04"><h3>2015.1.1 One year</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/5.jpg" alt="img05"><h3>2015.3 What？实习？</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/10.jpg" alt="img10"><h3>2015.3 和微信的缘分</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/6.jpg" alt="img06"><h3>2015.4 再见，文艺部，没有再见</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/7.jpg" alt="img07"><h3>2015.4 鹅厂面试</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/8.jpg" alt="img08"><h3>2015.5 想想人生</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/9.jpg" alt="img09"><h3>2015.7 初来乍到</h3></a></li>
 
-          <li><a href=""><img src="/static/img/img-photo/11.jpg" alt="img11"><h3>2015.7 找房和实习</h3></a></li>
-          <li><a href=""><img src="/static/img/img-photo/12.jpg" alt="img12"><h3>2015.8 shadowtrees V2.0</h3></a></li>
-<!--           <li><a href="http://www.behance.net/gallery/13285315/Quarterly-Musashino-winter-of-2013-issue"><img src="/static/img/img-photo/13.jpg" alt="img13"><h3>Quarterly Musashino winter of 2013 issue</h3></a></li>
-          <li><a href="http://www.behance.net/gallery/16541811/MAINICHI-CHUUGOKUGO-May-2014"><img src="/static/img/img-photo/14.jpg" alt="img14"><h3>MAINICHI CHUUGOKUGO April 2014</h3></a></li> -->
-        </ul>
-      </section>
-    </div><!-- /container -->
-    <div class="footer-banner" style="width:728px; margin:160px auto 100px"></div>
     <script src="/static/js/js-photo/masonry.pkgd.min.js"></script>
     <script src="/static/js/js-photo/imagesloaded.pkgd.min.js"></script>
     <script src="/static/js/js-photo/classie.js"></script>
@@ -192,10 +160,22 @@
       } );
     </script>
   </div><!-- /st-container -->
-
- 
 </div>
 
+
+    <script src="/static/js/js-dialog/classie.js"></script>
+    <script src="/static/js/js-dialog/dialogFx.js"></script>
+    <script>
+      (function() {
+
+        var dlgtrigger = document.querySelector( '[data-dialog]' ),
+          somedialog = document.getElementById( dlgtrigger.getAttribute( 'data-dialog' ) ),
+          dlg = new DialogFx( somedialog );
+
+        dlgtrigger.addEventListener( 'click', dlg.toggle.bind(dlg) );
+
+      })();
+    </script>
       <script src="/static/js/classie.js"></script>
       <script src="/static/js/sidebarEffects.js"></script>
 
