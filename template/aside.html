@@ -3,56 +3,38 @@ a{
     color: #666666
 }
 </style>
-<div class="col-xs-2">  
+
+  
  <br/><br/><br/><br/>
 
-    <div class="container-secondary">
-      <div class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix-top" role="complementary">
+    <!--侧栏第一部分-->
         <div class="panel panel-default">
           <div class="panel-body">
-
-<br/>
-
+          </br>
           <p align="center">
-              <img src="http://z.k1982.com/design_img/201308/201308051700443479.jpg" alt="LOGO" name="logo" width="110" height="100" id="logo" class="img-circle" align="center"/>
+              <img src="/static/img/owner.jpg" alt="LOGO" name="logo" width="110" height="100" id="logo" class="img-circle" align="center"/>
           </p>
-</br>
+          </br>
           <p align="center">
               <a data-toggle="modal" data-target="#myInfo" href=""  data-toggle="tooltip" data-placement="top" title="讨厌～偷看人家的隐私了la～" style="color: #666666">骏宇就是wind
               </a>
           </p>
-          <p  align="center">
+          <p align="center">
               <a href="http://j.map.baidu.com/_say5" target="_blank">
                     <span class="glyphicon glyphicon-map-marker" aria-hidden="true">
                     </span>
               </a>
           </p>
 
-<!--           <p align="center">
-              <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="去我的微博逛逛吧～">
-                <a href="http://weibo.com/u/2949530701?from=profile&wvr=5&loc=infdomain#_loginLayer_1416022467903">关注Ta
-                </a>
-              </button>
-          </p> -->
           <hr/>
-     
-<!--             <address>
-                <p style="font-size:22px" align="center">我是个</p>
-                <p align="center">&nbsp;男，非单身的</p>
-                <p align="center" style="font-size:22px">程序猿</p>
-                <p  align="center">找到我
-                  <a href="http://j.map.baidu.com/_say5" target="_blank">
-                    <span class="glyphicon glyphicon-map-marker" aria-hidden="true">
-                    </span>
-                </a>
-                </p><br>
-            </address> -->
+
             <ul class="nav nav-pills nav-stacked">
               <li role="presentation"><a href="/" style="color: #666666">首页</a></li>
               <li role="presentation"><a href="/blog" style="color: #666666">博客</a></li>
-              <li role="presentation"><a href="/contact" style="color: #666666">时间轴</a></li>
-              <li role="presentation"><a href="/more" style="color: #666666">留言板</a></li>
+              <li role="presentation"><a href="/timestamp" style="color: #666666">时间轴</a></li>
+              <li role="presentation"><a href="/bbs" style="color: #666666">论坛</a></li>
               <li role="presentation"><a href="/cloud" style="color: #666666">好玩</a></li>
+              <li role="presentation"><a href="/product" style="color: #666666">产品</a></li>
               <li>
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="color: #666666">友情链接<span class="caret"></span>
                 </a>
@@ -63,24 +45,28 @@ a{
                   </ul>
               </li>
             </ul>
-
-            </div> 
-          </div>
-
-<!--             <blockquote>
-            </blockquote> -->
-        
+          </div> 
         </div>         
-    </div>   
-</div>
+    <!--侧栏第一部分 end-->
+    </br>
+
+    <!--侧栏第二部分-->
 
 
- </div>
- 
- </div> 
+        <div class="thumbnail">
+            <img src="/static/img/alipay.png" alt="...">
+            <div class="caption">
+                <h3 align="center">扫描捐赠</h3>
+                <p>无论数额，扫描上二维码，通过支付宝给予本站支持，本站将特别感谢你的捐赠。</p>
+                <p align="center">Thanks！</p>
+                <hr/>
+                <p align="center"><!-- <a href="#" class="btn btn-primary" role="button">Bu</a> --> 
+                  <a href="#" data-toggle="modal" data-target="#thankList" class="btn btn-default" role="button">鸣谢</a>
+                </p>
+            </div>
+        </div>
 
-
-
+    <!--侧栏第二部分 end-->
 
 <!--Myinfo-->
 <div class="modal fade" id="myInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -90,26 +76,20 @@ a{
         <button type="button" class="close" data-dismiss="modal">
             <span aria-hidden="true">&times;</span>
             <span class="sr-only">Close</span></button>
-              <h4 class="modal-title" id="myModalLabel">关于我</h4>
+              <h4 class="modal-title" id="myModalLabel">关于我<span class="glyphicon glyphicon-user"></span></h4>
       </div>
     
         <div class="modal-body">
-          <dl class="dl-horizontal">
-              <span class="glyphicon glyphicon-user">站主</span>
-<br/>
-                
-                <dt>姓名</dt>
-                  <dd>骏宇wind</dd>
-                <dt>性别</dt>
-                  <dd>男</dd>
-                <dt>今年</dt>
-                  <dd>21啦～</dd>
-                <dt>学校</dt>
-                  <dd>华南理工大学</dd>
-                <dt>专业</dt>
-                  <dd>一个苦逼的，傻逼的程序师～</dd>
-                <dt>人生格言</dt>
-                  <dd>直面暗影，找寻真理</dd>
+          <dl class="dl-horizontal">         
+          <br/>
+                <dt>Name</dt>
+                  <dd>Wind Young</dd>
+                <dt>Sex</dt>
+                  <dd>不女不人妖</dd>
+                <dt>Words</dt>
+                  <dd>爱生活，爱漂亮妹子，爱LOL，爱吉他和指弹</dd>
+                <dt></dt>
+                  <dd>敲代码，喝可乐，玩摇滚，我就是我</dd>
           </dl>
         </div>
 
@@ -121,4 +101,37 @@ a{
   </div>
 </div>
 
-<!--Myinfo end>
+<!--Myinfo end -->
+
+<!--thank list -->
+<div class="modal fade" id="thankList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span></button>
+              <h4 class="modal-title" id="myModalLabel">特别鸣谢</h4>
+      </div>
+    
+        <div class="modal-body">
+          <dl class="dl-horizontal">
+              <span class="glyphicon glyphicon-user">土豪</span>
+              <br/>
+                 {% for user in alluser %}
+                <dt>土豪</dt>
+                  <dd>{{ user.username }} &nbsp;&nbsp;捐献： {{ user.donate }}</dd>
+                  {% endfor %}
+          </dl>
+                
+
+        </div>
+
+      <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--thank list end-->

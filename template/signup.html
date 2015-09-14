@@ -1,0 +1,130 @@
+{% extends "bbs-base.html" %}
+{% load comments %}
+{% block content_body %} 
+
+
+<style type="text/css">
+  body{ 
+    background:url(/static/img/LOGO.jpg);
+  }
+</style>
+ <script src="/static/js/check_signup.js" type="text/javascript"></script>
+
+<!--添加panel-->
+    <div class="panel panel-default">
+        <div class="panel">
+          <h4 align="center">加入我们，shadowtrees</h4>
+        </div>
+
+      <div class="main_body">
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 这是一个言论自由的地方，你可以尽情发表你的看法和想法，也随时欢迎你向我反馈意见和建议。
+            </br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            但是下列内容是严禁禁止的：</br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）对他人有人身攻击内容；</br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（2）带有淫秽、色情的内容；</br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（3）对社会、集体带来公共安全破坏的内容；</br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们希望你能自觉维护一个良好的环境氛围，而不是破坏它，如果违反上述其中一条，账号将被禁用。
+            </p>
+            <hr/>
+
+      <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;填写资料，带＊为必填</h5>
+        <form role="form" name="reg" action="/signup/" method="post" onSubmit="return do_check()">
+          <div class="row">
+
+            <div class="col-md-5 col-md-offset-3">
+
+                </br></br>
+                <div class="form-group left-inner-addon">
+                  <input name="username" id="username" type="text" class="form-control" placeholder="用户名">
+                  <p id="tips"></p>
+                </div>
+
+                <div class="form-group left-inner-addon">
+                  <label class="radio-inline">
+                    <input type="radio" name="sex" id="inlineRadio1" value="男"> 男
+                  </label>
+
+                  <label class="radio-inline">
+                    <input type="radio" name="sex" id="inlineRadio2" value="女"> 女
+                  </label>
+                </div>
+
+                <div class="form-group left-inner-addon">                 
+                  <input name="password" type="password" class="form-control"  placeholder="密码">
+                </div>
+                
+                <div class="form-group left-inner-addon">              
+                  <input name="cpassword" type="password" class="form-control"  placeholder="请重复输入密码">
+                </div>
+
+<!--                  <div class="form-group left-inner-addon"> 
+                  <input name="phone" type="text" class="form-control"  placeholder="手机">
+                </div> -->
+
+                <div class="form-group left-inner-addon">  
+                  <img src="..." alt="..." class="img-circle">&nbsp;&nbsp;&nbsp;&nbsp;
+                  <button type="submit" name="sub" class="btn btn-primary" >上传头像 </button> (建议120x90）
+                </div>
+
+                <div class="form-group left-inner-addon">
+                  <input name="email" type="email" class="form-control" id="input_email" placeholder="邮箱">
+                </div>
+              
+              </br></br>
+                <p align="center">
+                  <button type="submit" name="sub" class="btn btn-primary" >注册</button>
+                  <button type="reset" name="res" class="btn btn-default">重填</button>
+                </p>
+
+            </div>  
+          </div> 
+        </form>
+
+        </br></br>
+
+        <hr/>
+          <div class="copyright">
+              <p id="copyright" align="center">                    
+                    Copyright © 2014 Wind Young 根据《公共网络法》保留所有权利.<br/><br/>
+              </p>
+          </div>
+      </div>
+    </div>
+
+      <!--添加panel end-->
+
+<div class="modal fade" id="user_exit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">提示</h4>
+      </div>
+      <div class="modal-body">
+        {{ message }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function(){
+        var state =  "{{ state }}";
+        if(state){
+            $('#user_exit').modal();                      // 以默认值初始化
+            $('#user_exit').modal({ keyboard: false });   // initialized with no keyboard
+            $('#user_exit').modal('show');
+            if(state == 0){
+              setTimeout("window.location.href = '/bbs/';",5000);
+            }
+        }
+
+      });
+</script>
+
+{% endblock %}

@@ -1,0 +1,276 @@
+<style>
+a{
+    color: #666666
+}
+</style>
+ <br/><br/><br/><br/>
+
+    <!--侧栏第一部分-->
+        <div class="panel panel-default">
+          <div class="panel-body">
+          </br>
+
+<!--           {% ifequal login_user 1 %}
+          <p align="center">
+              <img src="/static/img/owner.jpg" alt="LOGO" name="logo" width="110" height="100" id="logo" class="img-circle" align="center"/>
+          </p>
+          </br>
+
+          <p align="center">
+              <a data-toggle="modal" data-target="#myInfo" href=""  data-toggle="tooltip" data-placement="top" title="讨厌～偷看人家的隐私了la～" style="color: #666666"> {{ user.username }}
+              </a>
+          </p>
+          <hr/>
+          <p id="operation" align="center">
+
+              <a href="#" style="color: #666666" data-toggle="tooltip" data-placement="right" title="注销用户">
+                <span class="glyphicon glyphicon-remove">
+                </span>
+              </a>&nbsp;
+              <a href="#" style="color: #666666" data-toggle="tooltip" data-placement="right" title="写文章">
+                <span class="glyphicon glyphicon-pencil"></span>
+              </a>&nbsp;
+
+              <a href="/user_page/" style="color: #666666" data-toggle="tooltip" data-placement="right" title="修改信息">
+                <span class="glyphicon glyphicon-cog"></span>
+              </a>&nbsp;
+
+              <a href="#" style="color: #666666"  data-toggle="tooltip" data-placement="right" title="消息盒子">
+                    <span class="glyphicon glyphicon-envelope">
+                    </span>
+                    <span class="badge">3</span>
+              </a>&nbsp;
+          </p>
+            
+
+          {% else %} -->
+          <p align="center">
+              <img src="/static/img/owner.jpg" alt="LOGO" name="logo" width="110" height="100" id="you" class="img-circle" align="center"/>
+            </p>
+            <!-- <p id="user" align="center">你尚未登录</p> -->
+            <p id="user" align="center">
+              <a id="username" data-toggle="modal" data-target="#myInfo" href=""  data-toggle="tooltip" data-placement="top" title="讨厌～偷看人家的隐私了la～" style="color: #666666"> 你尚未登录
+              </a>
+            </p>
+            <hr/>
+
+            <p id="guest" align="center">
+              <button class="btn btn-default" id="btn" type="submit" data-toggle="modal" data-target="#login" href=""  data-toggle="tooltip" data-placement="top">登录</button>
+              <button  class="btn btn-default" id="signup_btn">注册</button>
+            </p>
+
+<!--             <p align="center">
+                <a data-toggle="modal" data-target="#myInfo" href=""  data-toggle="tooltip" data-placement="top" title="讨厌～偷看人家的隐私了la～" style="color: #666666"> {{ user.username }}
+                </a>
+            </p> -->
+
+            <div id="operation">
+              <p align="center">
+                <a href="#" id="logout" onClick="" style="color: #666666" data-toggle="tooltip" data-placement="right" title="注销用户">
+                  <span class="glyphicon glyphicon-remove">
+                  </span>
+                </a>&nbsp;
+                <a href="/write/" style="color: #666666" data-toggle="tooltip" data-placement="right" title="写文章">
+                  <span class="glyphicon glyphicon-pencil"></span>
+                </a>&nbsp;
+
+                <a href="/user_page/" style="color: #666666" data-toggle="tooltip" data-placement="right" title="修改信息">
+                  <span class="glyphicon glyphicon-cog"></span>
+                </a>&nbsp;
+
+                <a href="#" style="color: #666666"  data-toggle="tooltip" data-placement="right" title="消息盒子">
+                      <span class="glyphicon glyphicon-envelope">
+                      </span>
+                      <span class="badge">3</span>
+                </a>&nbsp;
+              </p>
+            </div>
+
+<!--           {% endifequal %} -->
+
+        </div>
+      </div>
+
+
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <ul class="nav nav-pills nav-stacked">
+              <li role="presentation"><a href="/" style="color: #666666">首页</a></li>
+              <li role="presentation"><a href="/bbs" style="color: #666666">论坛</a></li>
+              <li role="presentation"><a href="/blog" style="color: #666666">博客</a></li>
+              <li role="presentation"><a href="/timestamp" style="color: #666666">时间轴</a></li>
+              <li role="presentation"><a href="/more" style="color: #666666">留言板</a></li>
+              <li role="presentation"><a href="/cloud" style="color: #666666">好玩</a></li>
+              <li role="presentation"><a href="/product" style="color: #666666">产品</a></li>
+              <li>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="color: #666666">友情链接<span class="caret"></span>
+                </a>
+                  <ul class="dropdown-menu">
+                      <li role="presentation"><a href="http://www.pibipa.com/" target="_blank" style="color: #666666">Pibipa</a></li>
+                      <li role="presentation"><a href="http://www.binsite.me/" target="_blank" style="color: #666666">Binsite</a></li>
+                      <li role="presentation"><a href="http://www.hebiblog.com/" target="_blank" style="color: #666666">Hebiblog</a></li>
+                  </ul>
+              </li>
+            </ul>
+          </div> 
+        </div>         
+    <!--侧栏第一部分 end-->
+    </br>
+
+    <!--侧栏第二部分-->
+
+
+        <div class="thumbnail">
+            <img src="/static/img/alipay.png" alt="...">
+            <div class="caption">
+                <h3 align="center">扫描捐赠</h3>
+                <p>无论数额，扫描上二维码，通过支付宝给予本站支持，本站将特别感谢你的捐赠。</p>
+                <p align="center">Thanks！</p>
+                <hr/>
+                <p align="center"><!-- <a href="#" class="btn btn-primary" role="button">Bu</a> --> 
+                  <a href="#" data-toggle="modal" data-target="#thankList" class="btn btn-default" role="button">鸣谢</a>
+                </p>
+            </div>
+        </div>
+
+    <!--侧栏第二部分 end-->
+
+<!--Myinfo-->
+<div class="modal fade" id="myInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span></button>
+              <h4 class="modal-title" id="myModalLabel">个人信息<span class="glyphicon glyphicon-user"></span></h4>
+      </div>
+
+
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-1"><img src="/static/img/client.jpg" height="100" width="80" alt=""/></div>
+            <div class="col-md-11">
+              <dl class="dl-horizontal">
+                <dt>Name</dt>
+                  <dd> {{ user.username }} </dd>
+                <dt>Sex</dt>
+                  <dd> {{ user.sex }}</dd>
+                <dt>Email</dt>
+                  <dd> {{ user.email }} </dd>
+                <dt>何方神圣</dt>
+                  <dd> {{ user.address }} </dd>
+                <dt>格言</dt>
+                  <dd> {{ user.motto }} </dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+
+      <div class="modal-footer">
+          <button id="go_modify" type="button" class="btn btn-default">修改</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Myinfo end -->
+
+<!--thank list -->
+<div class="modal fade" id="thankList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span></button>
+              <h4 class="modal-title" id="myModalLabel">特别鸣谢</h4>
+      </div>
+    
+        <div class="modal-body">
+          <dl class="dl-horizontal">
+              <span class="glyphicon glyphicon-user">土豪</span>
+              <br/>
+                 {% for user in alluser %}
+                <dt>土豪</dt>
+                  <dd>{{ user.username }} &nbsp;&nbsp;捐献： {{ user.donate }}</dd>
+                  {% endfor %}
+          </dl>
+                
+
+        </div>
+
+      <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--thank list end-->
+
+
+<div class="modal fade" id="makesure" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">你真的要注销吗？</h4>
+      </div>
+      <div class="modal-body">
+        <p align="center">
+          <button id="log_out" type="button" class="btn btn-default">是的</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">再逛下</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<script src="/static/js/jquery.cookie.js"></script>
+<script type="text/javascript">
+
+  $(function () {
+
+      $('[data-toggle="tooltip"]').tooltip();
+      var login_user =  $.cookie('login_user');
+      if(!login_user) {
+        $("#operation").empty();
+      }
+      else {
+        var login_user =  $.cookie('login_user');
+
+        $("#guest").empty();
+        $("#username").text(login_user);
+      }
+
+  })
+
+  $("#logout").click(function(){
+    $('#makesure').modal();                      // 以默认值初始化
+    $('#makesure').modal({ keyboard: false });   // initialized with no keyboard
+    $('#makesure').modal('show');
+  })
+
+  $("#log_out").click(function(){
+    window.location.href = "/logout/";
+  })
+
+  $("#signup_btn").bind("click",function(){
+    window.location.href = "/signup/";
+  })
+
+  $("#go_modify").bind("click",function(){
+    window.location.href = "/user_page/";
+  })
+</script>
+
+
+{% include "login.html" %}
+
+
+

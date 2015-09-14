@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block content_body %}
+<style type="text/css">
+  body{ 
+    background:url(/static/img/backt.jpg);
+  }
+</style>
+
+<h3 align="center"><span class="label label-default">Products</span></h3>
+<hr/>
+ <!--博文详细页面-->
+ <div class="row">
+            <div class="col-sm-6 col-md-4">
+              <div class="thumbnail">
+                <img src="/static/img/dolphin.png"/>
+                <div class="caption">
+                  <h4>
+                    《Dolphin》
+                  </h4>
+                  <hr/>
+                  <br>
+                  <p>--- Your Great Web Framework</p>
+                  <br>
+                  <p><a href="https://github.com/wind3110991/dolphin" class="btn btn-primary" role="button">Fork</a> <a href="#" class="btn btn-default" role="button" target="_blank">详细</a></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4">
+              <div class="thumbnail">
+                <img src="/static/img/shadowtree.png"/>
+                <div class="caption">
+                  <h4>《Shadowtrees》</h4>
+                  <hr/>
+                  <br>
+                  <p>--- Shadowtrees, Think what you think</p>
+                  <br>
+                  <p><a href="https://github.com/wind3110991/shadowtrees" class="btn btn-primary" role="button" target="_blank">Fork</a> <a href="#" class="btn btn-default" role="button">详细</a></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4">
+              <div class="thumbnail">
+                <img src="/static/img/storybox.png"/>
+                <div class="caption">
+                  <h4>《Story Box》</h4>
+                  <hr/>
+                  <br>
+                  <p>--- Mark your Life</p>
+                  <br>
+                  <p>
+                    <a href="https://github.com/wind3110991/StoryBox" class="btn btn-primary" role="button">Fork</a>
+                    <a href="#" class="btn btn-default" role="button" target="_blank">详细
+                    </a>
+                    <a href="https://github.com/wind3110991/StoryBox" class="btn btn-danger" role="button">App
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>  
+
+  <div class="content-main">
+      <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="blog_description">
+              <div class="blog_title"></div>
+                  <div class="dropdown">
+
+          <a href="/" style="color: #666666">首页</a> > 
+          <a href="/product" style="color: #666666">产品</a>
+          <a href="/blog_classify/?classification={{ blog.classification }}" style="color: #666666">
+          </a>
+          <hr/>
+          <h3 align="center">《我并不是一个喜欢“折腾东西”的人》
+          </h3>
+          <h5 align="center"><span class="label label-default">----写给那些不了解程序员的人
+            </span>
+          <h5>
+        </br></br></br>
+        {% include "product-content.html" %}
+
+        
+
+  <!--           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+              <FONT style="FONT-SIZE: 10pt; FONT-FAMILY: 微软雅黑,">本文</FONT>
+                <span class="caret"></span>
+            </button>
+
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation">
+                  <a role="menuitem" tabindex="-1" href="#">收藏
+                    <span class="glyphicon glyphicon-heart"></span>
+                  </a>
+                </li>
+          
+                <li role="presentation">
+                  <a id="transfer" role="menuitem" tabindex="-1" href="#" onBlur="shareIt()">转发
+                    <span class="glyphicon glyphicon-share"></span>
+                  </a>
+                </li>
+
+                <li role="presentation" >
+                  <a role="menuitem" tabindex="-1" href="/blog_favor/?id={{ blog.id }}" onBlur=favor()>赞一个〜
+                    <span class="glyphicon glyphicon-hand-right" ></span>
+                  </a>
+                </li>
+              </ul> -->
+        
+<!--             <span class="glyphicon glyphicon-folder-open"> 分类:
+              <a href="#" style="color: #666666">{{ blog.classification }}</a>
+            </span> -->
+<!-- 
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="glyphicon glyphicon-user"> 作者:
+              <a data-toggle="modal" data-target="#myInfo" href=""  data-toggle="tooltip" data-placement="top"  style="color: #666666">
+              </a>
+            </span> -->
+          </div>
+
+{%include "userInfo.html"%}
+<!--       <div class="blog_info1">
+        <span class="blog_info1_list">         
+</br>
+          <span class="glyphicon glyphicon-time"></span>
+        </span>
+      </div> -->
+      
+      <div class="blog_splitline"></div>
+
+<br/>
+              <FONT style="FONT-SIZE: 13pt; FONT-FAMILY: 微软雅黑,">
+ 
+              </FONT>
+            </div>
+          </div>
+      </div>
+      
+  </div>
+
+
+    <!--博文页面 end-->
+</br></br></br></br></br></br>
+
+
+
+ <!--评论页面-->
+
+ <!--评论页面 end-->
+
+{% endblock %}

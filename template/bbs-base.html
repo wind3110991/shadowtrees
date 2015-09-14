@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <script src="http://lib.sinaapp.com/js/jquery/2.0.3/jquery-2.0.3.min.js"></script>
       <script src="/static/js/blog_operation.js"></script>
-      <title>暗影树的小站</title>
+      <title>说点什么吧</title>
       <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" />
       <link rel="icon" href="/static/img/forrest.ico">
 <style>
@@ -31,24 +31,8 @@
 
 {%include "navigation.html"%}
 <!-- 页头 -->
-  <div id="headImg">
-    <div>
-    </div>
-    <div>
-      <img src="/static/img/headImg1.png" width="100%"  />
-    <div>
-  <div>
   <div class="bs-docs-header" id="content">
         <div class="container">
-            <!--<header class="jumbotron subhead" id="overview">
-            <h1>欢迎来到暗影森林
-              <span class="glyphicon glyphicon-tree-conifer"></span>
-              <span class="glyphicon glyphicon-tree-deciduous"></span>
-              <span class="glyphicon glyphicon-tree-conifer"></span>
-            </h1>
-            <p class="lead">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;直面暗影，找寻真理</p>
-</header>-->
-
 
 <br/><br/>
 <br/><br/>         
@@ -60,17 +44,17 @@
 <div class="container">
   <div class="row"> 
 
-    <div class="col-xs-10">
+    <div class="col-xs-9">
       <div class="content_body">
       {% block content_body %}{% endblock %}
       </div>
     </div>
 <!-- 博文 end -->
 
-
 <!-- 侧面内容 -->
-    <div class="col-xs-2">
-    {% include "aside.html" %}
+    <div class="col-xs-3">
+    {% include "bbs-aside.html" %}
+      </div>
 <!-- end 侧面内容 -->
     </div>
 
@@ -88,31 +72,20 @@
  <!-- end .footer -->
     </div>
 
+  <script type="text/javascript">
+    $(function(){
+        //var login_user =  $.cookie('loggin_user');
+        //if(login_user){
+            // $("#main_title").text('欢迎您，' + logged_in_user);
+            // $('#login_button').text('退出');
+            // $('#login_button').attr('href', '/');
+            // $('#login_button').click(function(){ 
+            //     $.cookie('logged_in_user',"", { expires: -1 });
+          //  }
+          });
+        
+  </script>
 
-  <!-- <div class="container">
-    <footer class="footer">
-            <p class="pull-right">
-              <a href="#"><button type="button" class="btn btn-danger active">返回顶部</button></a>
-            </p>
-
-</br></br>
-</br></br>
-</br></br>
-</br></br>
-
-<hr/>
-          <div class="copyright">
-
-              <p id="copyright" align="center">                    
-                    Copyright © 2012 - 2014 SCUT 骏宇 根据《公共网络法》保留所有权利.<br/><br/>
-              </p>
-                  <p id="friendlink" align=center>友情链接:<a href="http://binsite.me"> binsite</a> | <a href="http://www.hebiblog.com/">hebiblog</a>
-                  </p>
-                  <p align="center">http://www.shadowtrees.com</p>
-              </p>
-          </div>
-    </footer>
-  </div> -->
 </body>
 
 </html>

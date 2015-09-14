@@ -36,6 +36,16 @@ class Author(models.Model):
     def __unicode__(self):
         return u'%s' % (self.name)
 
+class User(models.Model):
+    id = models.IntegerField(primary_key=True)
+    username = models.CharField(max_length=30)
+    password = models.CharField(max_length=30)
+    sex = models.CharField(max_length=4)
+    donate = models.FloatField(max_length=10, default=0)
+    email = models.EmailField(max_length=50)
+    motto = models.CharField(max_length=200, default='')
+    address = models.CharField(max_length=60, default='')
+
 class Blog(models.Model): # 文章表
     caption = models.CharField(max_length=50)
     subcaption = models.CharField(max_length=50, blank=True)
@@ -48,8 +58,8 @@ class Blog(models.Model): # 文章表
     author = models.ForeignKey(Author)
     classification = models.ForeignKey(Classification)
 
-    def __unicode__(self):
-        return u'%s %s' % (self.caption,self.publish_time,self.classification)
+    # def __unicode__(self):
+    #     return u'%s %s' % (self.caption,self.publish_time,self.classification)
 
     @permalink
     def get_absolute_url(self):

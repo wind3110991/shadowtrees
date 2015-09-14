@@ -1,0 +1,224 @@
+{% extends "bbs-base.html" %}
+
+{% block content_body %} 
+<style type="text/css">
+  body{ 
+    background:url(/static/img/back3.png);
+  }
+
+</style>
+<script src="/static/js/check_signup.js" type="text/javascript"></script>
+
+<div class="panel panel-default">
+    <div class="panel">
+      <br/>
+  <a href="/" style="color: #666666">&nbsp;&nbsp;shadowtrees</a> > 
+  <a href="/bbs/" style="color: #666666">论坛</a> >
+  <a href="/user_page/" style="color: #666666">我的信息</a>
+  <hr/>
+    	<h3>&nbsp;&nbsp;修改信息</h3>
+    	
+    	<hr/>
+    	<div class="main_body">
+    	
+
+    	
+         <div class="row">
+
+           <div class="col-md-5 col-md-offset-3">
+
+                <div class="form-group left-inner-addon">
+                  	<img src="/static/img/client.jpg" width="100" height="120" class="img-circle">
+                  	<button id="upload_photo" name="upload" class="btn btn-primary" >上传头像 </button> (建议120x90）
+
+                </div>
+                <hr/>
+
+				<!--性别不能修改-->
+                <div class="form-group left-inner-addon">
+                	<span class="label label-default">用户名  </span>&nbsp;  {{ user.username }}&nbsp;
+                	<span class="label label-default">性别  </span>&nbsp; 男
+
+<!--                   <input name="username" id="username" type="text" class="form-control" placeholder="用户名">
+                  <p id="tips"></p> -->
+                </div>
+                </br>
+
+                <div class="form-group left-inner-addon">
+                	<span class="label label-default">邮箱  </span>&nbsp;  {{ user.email }}&nbsp;
+                </div>
+                <hr/>
+
+                <a data-toggle="collapse" href="#collapseMotto" aria-expanded="false" aria-controls="collapseMotto">
+                	<span class="label label-default">添加你的格言</span> &nbsp; {{ user.motto }}
+                </a>
+				</br>
+                </br>
+
+				<div class="collapse" id="collapseMotto">
+	            	<div class="form-group left-inner-addon">
+                		<div class="form-group left-inner-addon">
+                			<input id="motto" name="motto" type="text" class="form-control" placeholder="格言">
+                		</div>
+                	</div>
+                </div>
+                </br>
+
+                <a data-toggle="collapse" href="#collapseAddress" aria-expanded="false" aria-controls="collapseAddress">
+                	<span class="label label-default">来自何方</span> &nbsp; {{ user.address }}
+                </a>
+                </br>
+                </br>
+
+				<div class="collapse" id="collapseAddress">
+	            	<div class="form-group left-inner-addon">
+                		<div class="form-group left-inner-addon">
+                			<input id="address" name="address" type="email" class="form-control" placeholder="来自何方">
+                		</div>
+                	</div>
+                </div>
+				
+                </br>
+
+				<a data-toggle="collapse" href="#collapsePassword" aria-expanded="false" aria-controls="collapsePassword" >
+				  <span class="label label-default">点击修改密码</span> **********                   <a href="#" data-container="body" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="如果你忘记了密码，请提供您的用户名以及大概的密码，邮件发送至windisbest@gmail.com">&nbsp;&nbsp;忘记密码?
+                  </a>
+				</a>
+				<br/>
+
+				</br></br>
+				
+				<div class="collapse" id="collapsePassword">
+	                <div class="form-group left-inner-addon">
+	                	<span class="label label-default">旧密码</span>
+	                	<input name="password" id="password" type="password" class="form-control"  placeholder="旧密码">
+	                </div>
+
+                	<div class="form-group left-inner-addon">
+                		<span class="label label-default">再次输入密码</span>       
+                		<input id="cpassword" name="cpassword" type="password" class="form-control"  placeholder="再次输入您的旧密码">
+                	</div>
+
+                	<div class="form-group left-inner-addon">
+                		<span class="label label-default">新密码</span>       
+                		<input id="new_password" name="new_password" type="password" class="form-control"  placeholder="新密码">
+                	</div>
+
+	            </div>
+
+                <hr/>
+                </br>
+              
+                <p align="center">
+                  <button id="sub_btn" type="submit" name="sub" class="btn btn-primary" >提交</button>
+                </p>
+
+
+
+	        </div>  
+          </div> 
+	    </div>
+    </div>
+   
+</div>
+
+<div class="modal fade" id="tips" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">提示</h4>
+      </div>
+      <div class="modal-body">
+        <p id="alert_text"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+
+$(function () {
+  $('[data-toggle="popover"]').popover();
+})
+
+$("#sub_btn").click(function(){
+  
+	var password = $("#password").val();
+	var cpassword = $("#cpassword").val();
+	var address = $("#address").val();
+	var motto = $("#motto").val();
+	var new_password = $("#new_password").val();
+
+  	if(cpassword || password){
+  		if(password == cpassword){
+	  		$.post("/modify/", {password:password, new_password:new_password, address:address, motto:motto},
+	        	function(data){
+		          var dataObj=eval("("+data+")");
+		          if(dataObj.state == 0) {
+		            $('#tips').modal();                      // 以默认值初始化
+		            $('#tips').modal({ keyboard: false });   // initialized with no keyboard
+		            $('#tips').modal('show');
+		            $('#alert_text').text(dataObj.message);
+		            setTimeout("window.location.href = '/user_page/';",2000);
+		          }
+		                
+		          else {
+		            $('#tips').modal();                      // 以默认值初始化
+		            $('#tips').modal({ keyboard: false });   // initialized with no keyboard
+		            $('#tips').modal('show');
+		            $('#alert_text').text(dataObj.message);
+		          }
+		        }); //end post
+	  		}
+	  	
+	  	else{
+	  			$('#tips').modal();                      // 以默认值初始化
+	        	$('#tips').modal({ keyboard: false });   // initialized with no keyboard
+	        	$('#tips').modal('show');
+	        	$('#alert_text').text("两次密码不一致");
+	  		}
+	  	}	//end if
+	  	
+	else{
+	  		$.post("/modify/", {address:address, motto:motto, password:null, new_password:null},
+	        	function(data){
+		          var dataObj=eval("("+data+")");
+		          if(dataObj.state == 0) {
+		            $('#tips').modal();                      // 以默认值初始化
+		            $('#tips').modal({ keyboard: false });   // initialized with no keyboard
+		            $('#tips').modal('show');
+		            $('#alert_text').text(dataObj.message);
+		            setTimeout("window.location.href = '/user_page/';",2000);
+		          }
+		                
+		          else {
+		            $('#tips').modal();                      // 以默认值初始化
+		            $('#tips').modal({ keyboard: false });   // initialized with no keyboard
+		            $('#tips').modal('show');
+		            $('#alert_text').text(dataObj.message);
+		          }
+		        }); //end post
+	}
+});
+
+    $(function(){
+        var state =  "{{ state }}";
+        // if(state){
+        //     $('#user_exit').modal();                      // 以默认值初始化
+        //     $('#user_exit').modal({ keyboard: false });   // initialized with no keyboard
+        //     $('#user_exit').modal('show');
+        //     if(state == 0){
+        //       setTimeout("window.location.href = '/bbs/';",5000);
+        //     }
+        // }
+
+      });
+</script>
+
+{% endblock %}
+

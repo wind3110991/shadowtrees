@@ -28,24 +28,23 @@
             <h1>
               <small align="center" style="font-size:16px">This tree hasn't got any shadow yet～</small>
             </h1>
+          </div>
         </div>
-      </div>
 
       {% else %}
 
         {% get_comment_list for blog as comments %}
-
-        <div class="comments_body">
-
-            {% for comment in comments %}
-            <div class="comment_container">
-                
+        
+      {% for comment in comments %}
+      <div class="comments_body">
+          <div class="comment_container">
+              
               {% ifequal comment.user_email '312456073@qq.com' %}
         
               <div class="panel panel-default">
                   <div id="userName" class="panel-heading">
     
-                    <a data-toggle="modal" data-target="#myInfo">{{ comment.user_name }}  </a>
+                    <a data-toggle="modal" data-target="#myInfo">{{ comment.user_name }} </a>
                     <img src="/static/img/mod.png" width="30" height="14"/> &nbsp;&nbsp;&nbsp;&nbsp;  
   
                     <span class="glyphicon glyphicon-time">{{ comment.submit_date|date:"Y-m-d H:i"}}</span>  &nbsp;&nbsp;&nbsp;&nbsp;评论
@@ -53,7 +52,7 @@
                   </div>
 
                     <div class="panel-body">
-                    <table>
+                      <table>
                         <tr>
                           <a href="{{ comment.user_url }}">
                             <td><img src="/static/img/owner.jpg" width="90" height="90" />
@@ -62,9 +61,9 @@
          &nbsp;&nbsp;
                             <td>{{ comment.comment }}</td>
                         </tr>
-                    </table>
+                      </table>
                     </div>
-              </div>  
+                </div>  
 
               {% else %}
 
@@ -97,15 +96,16 @@
                 <a href="#newcomment"; class = "reply_user" username="{{comment.user_name}}">[回复Ta]</a>
               </span>
               <hr/>
-  </div>
-</br></br>
+
+        
+          </br></br>
 <!--结束comment部分-->
-
-      {% endfor %}
-    {% endifequal %}
-
+      
+  </div>
 </div>
-
+  {% endfor %}        
+  
+  {% endifequal %}
 </br>
 
 <!-- 用户评论部分 -->

@@ -1,0 +1,38 @@
+## markdownEditor
+
+功能非常简单，基本能用。代码拼凑出来的。不知道有没有变形，在firefox下调试的。
+
+演示：<http://qianfeng.gitcafe.com/markdownEditor/demo/demo.html>
+
+###依赖  
+
+* [jQuery.js](http://jquery.com)
+* [markdown.js](https://github.com/evilstreak/markdown-js) - 文件已经包含进项目
+
+###使用
+引入  jquery.js , markdown.js , markdownEditor.js   文件
+
+调用代码:
+
+		&lt;textarea name="content" id="textarea-1"&gt;&lt;/textarea&gt;
+		&lt;script&gt;  
+		    var settings = { actions : [ 'bold', 'quote' ], previewBodyClass : 'className'  };
+		    $("#textarea-1").markDownEditor(settings); 
+		&lt;/script&gt; 
+
+内容输出:
+
+我建议在数据库中直接存markdown格式的内容，用php或者javascript转成html。
+
+		&lt;div class="JS-markdown-content"&gt;&lt;?php echo htmlspecialchars($content); ?&gt;&lt;/div&gt;
+		&lt;script&gt;  
+		    $(".JS-markdown-content").each(function(){
+		        $(this).html(
+		            markdown.toHTML( $(this).text() )
+		        );
+		    });
+		&lt;/script&gt; 
+
+###settings说明
+* actions - 显示的工具栏按钮，不指定表示默认，目前有 `['head3', 'bold', 'italic', 'quote', 'link', 'ul', 'ol', 'split', 'picture']`
+* previewBodyClass - 预览区块的附加样式类，用来定义预览区快内的文本样式，可以不指定表示默认。
