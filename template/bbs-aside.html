@@ -44,9 +44,11 @@ a{
             
 
           {% else %} -->
-          <p align="center">
-              <img src="/static/img/owner.jpg" alt="LOGO" name="logo" width="110" height="100" id="you" class="img-circle" align="center"/>
+          <div id="isguest">
+            <p align="center">
+              <img src="{{ user.headimg }}" name="logo" width="110" height="100" id="you" class="img-circle" align="center"/>
             </p>
+          </div>
             <!-- <p id="user" align="center">你尚未登录</p> -->
             <p id="user" align="center">
               <a id="username" data-toggle="modal" data-target="#myInfo" href=""  data-toggle="tooltip" data-placement="top" title="讨厌～偷看人家的隐私了la～" style="color: #666666"> 你尚未登录
@@ -70,21 +72,32 @@ a{
                   <span class="glyphicon glyphicon-remove">
                   </span>
                 </a>&nbsp;
-                <a href="/write/" style="color: #666666" data-toggle="tooltip" data-placement="right" title="写文章">
-                  <span class="glyphicon glyphicon-pencil"></span>
+                <a href="/u/?username={{ user.username }}" style="color: #666666" data-toggle="tooltip" data-placement="right" title="我的文章">
+                  <span class="glyphicon glyphicon-list-alt"></span>
                 </a>&nbsp;
 
                 <a href="/user_page/" style="color: #666666" data-toggle="tooltip" data-placement="right" title="修改信息">
                   <span class="glyphicon glyphicon-cog"></span>
                 </a>&nbsp;
 
-                <a href="#" style="color: #666666"  data-toggle="tooltip" data-placement="right" title="消息盒子">
-                      <span class="glyphicon glyphicon-envelope">
-                      </span>
-                      <span class="badge">3</span>
+                <a href="/msg/" style="color: #666666"  data-toggle="tooltip" data-placement="right" title="消息盒子">
+                      {% ifequal user.msg_num 0 %}
+
+                      <span class="glyphicon glyphicon-envelope"></span>
+
+                      {% else %}
+                      <span class="glyphicon glyphicon-envelope"></span>
+                      <span class="label label-danger">{{ user.msg_num }}</span>
+                      {%  endifequal %}
+
                 </a>&nbsp;
+                <button id="go_write" class="button button--antiman button--round-l button--text-medium">写篇文章
+                  <span class="glyphicon glyphicon-pencil"></span>
+                </button>
               </p>
+
             </div>
+
 
 <!--           {% endifequal %} -->
 
@@ -128,7 +141,7 @@ a{
                 <p align="center">Thanks！</p>
                 <hr/>
                 <p align="center"><!-- <a href="#" class="btn btn-primary" role="button">Bu</a> --> 
-                  <a href="#" data-toggle="modal" data-target="#thankList" class="btn btn-default" role="button">鸣谢</a>
+                  <button data-toggle="modal" data-target="#thankList" class="button button--ujarak button--border-thin button--text-thick" role="button">鸣谢</button>
                 </p>
             </div>
         </div>
@@ -143,13 +156,13 @@ a{
         <button type="button" class="close" data-dismiss="modal">
             <span aria-hidden="true">&times;</span>
             <span class="sr-only">Close</span></button>
-              <h4 class="modal-title" id="myModalLabel">个人信息<span class="glyphicon glyphicon-user"></span></h4>
+              <h5 class="modal-title" id="myModalLabel">个人信息</h5>
       </div>
 
 
         <div class="modal-body">
           <div class="row">
-            <div class="col-md-1"><img src="/static/img/client.jpg" height="100" width="80" alt=""/></div>
+            <div class="col-md-1"><img src="{{ user.headimg }}" height="100" width="110" alt=""/></div>
             <div class="col-md-11">
               <dl class="dl-horizontal">
                 <dt>Name</dt>
@@ -162,6 +175,10 @@ a{
                   <dd> {{ user.address }} </dd>
                 <dt>格言</dt>
                   <dd> {{ user.motto }} </dd>
+                <dt>注册时间</dt>
+                  <dd> {{ user.regist_time }} </dd>
+                <dt>你的Shadow ID</dt>
+                  <dd> {{ user.id }} </dd>
               </dl>
             </div>
           </div>
@@ -236,16 +253,18 @@ a{
 
   $(function () {
 
+
       $('[data-toggle="tooltip"]').tooltip();
       var login_user =  $.cookie('login_user');
       if(!login_user) {
         $("#operation").empty();
+        $("#isguest").empty();
+
       }
       else {
         var login_user =  $.cookie('login_user');
-
         $("#guest").empty();
-        $("#username").text(login_user);
+        $("#username").text("{{ user.username }}");
       }
 
   })
@@ -267,6 +286,12 @@ a{
   $("#go_modify").bind("click",function(){
     window.location.href = "/user_page/";
   })
+
+  $("#go_write").bind("click",function(){
+    window.location.href = "/write/";
+  })
+
+
 </script>
 
 

@@ -1,0 +1,106 @@
+{% extends "bbs-base.html" %}
+
+{% block title %} {{ article.caption }} {% endblock %}
+                        
+{% block content_body %}
+
+<style type="text/css">
+  body{ 
+    background:url(/static/img/back3.png);
+  }
+</style>
+ <!--博文详细页面-->
+            
+  <div class="content-main">
+      <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="blog_description">
+                  <div class="dropdown">
+                    <a href="/" style="color: #666666">首页</a> > 
+                    <a href="/bbs/" style="color: #666666">论坛</a> >
+                    <a href="/blog_classify/?classification={{ article.classification }}" style="color: #666666">{{ article.classification }}
+                    </a>
+                    <p  style="float:right">
+                      <img src="{{ article.user.headimg }}" class="img-circle" alt="你网速也太慢了吧～" style="width: 80px;  height: 74px;" >
+                    </p>
+
+                    <h3>
+                      {{ article.caption }}
+                    </h3>
+                    <hr/>
+        
+<!--             <span class="glyphicon glyphicon-folder-open"> 分类:
+              <a href="#" style="color: #666666">{{ article.classification }}</a>
+            </span> -->
+
+ 
+
+            
+          </div> <!-- dropdown end -->
+
+      {% include "userInfo.html" %}
+      <div class="blog_info1">
+        <span class="blog_info1_list">         
+          </br>
+          <span class="glyphicon glyphicon-time"> 发表时间：{{ article.update_time|date:"Y-m-d H:i" }}</span>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          
+          <span> 作者:
+              <a href="/u/?username={{ article.user.username }}" style="color: #666666">{{ article.user.username }}
+              </a>
+          </span>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <a id="favor_btn" href="#"><span class="glyphicon glyphicon-thumbs-up">赞</span></a>
+
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <span style="color: #666666" class="glyphicon glyphicon-comment">评论({{ article.discuss_num }})</span>
+          </span>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <span style="color: #666666" class="glyphicon glyphicon-star-empty">收藏({{ article.discuss_num }})</span>
+          </span>
+
+      </div>
+      
+      <hr/><br/>
+
+              <FONT style="FONT-SIZE: 13pt; FONT-FAMILY: 微软雅黑,">
+              {{ article.content | safe }}
+              </FONT>
+            </div>
+          </div>
+      </div>
+  </div>
+    <!--博文页面 end-->
+</br></br></br></br></br></br>
+
+
+ <!--评论页面-->
+ <!--评论页面 end-->
+<script type="text/javascript">
+$("#favor_btn").click(function(){
+  var id = "{{ article.id }}";
+  $.post("/favor/", {id:id},
+        function(data){
+          var dataObj=eval("("+data+")");
+          if(dataObj.state == 0) {
+            //alert(dataObj.message);
+            $('#tips').modal();                      // 以默认值初始化
+            $('#tips').modal({ keyboard: false });   // initialized with no keyboard
+            $('#tips').modal('show');
+            $('#alert_text').text(dataObj.message);
+            //setTimeout("window.location.href = '/bbs/';",5000);
+          }
+                
+          else {
+            $('#tips').modal();                      // 以默认值初始化
+            $('#tips').modal({ keyboard: false });   // initialized with no keyboard
+            $('#tips').modal('show');
+            $('#alert_text').text(dataObj.message);
+          }
+        });
+});
+</script>
+
+{% endblock %}

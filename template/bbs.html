@@ -2,15 +2,23 @@
 {% load comments %}
 {% block content_body %} 
 
-
-<style type="text/css">
+<style>
   body{ 
     background:url(/static/img/back3.png);
   }
+  span{
+    font-size:13px;
+  }
 </style>
+
 <!--添加panel-->
-      <div class="panel panel-default">
-        <div class="panel">
+<div class="panel panel-default">
+  <div class="panel">
+        <div class="box bg-1">
+            <h2 align="center">Shadowtrees Space</h2>
+          <button class="button button--ujarak button--border-thin button--text-thick">Creative</button>
+          <button class="button button--ujarak button--border-thin button--text-thick">Simple</button>
+          <button class="button button--ujarak button--border-thin button--text-thick">Freaky</button>
           <ul class="nav nav-pills" role="tablist">
             <li role="presentation">
               <a href="/product" style="color:#666666">产品</a>
@@ -39,22 +47,25 @@
             <li role="presentation"><a href="/blog_classify/?classification=创意" style="color:#666666">创意</a>
             </li>
           </ul>
-        </div>
 
-        <div class="panel-body">
-            <div class="blog_description">
-<!--添加panel-->
-              <a href="/" style="color: #666666">首页</a> > 
-              <a href="/bbs/" style="color: #666666">论坛</a>
+        </div>   <!--   box bg-1 -->
 
-<div class="row">
-  <div class ="col-sm-6">
-    <table>
-      <tr>
-        <form action ="/blog_search/?=" method="get">
-          <p>
-            <td>
-              <div class="dropdown">
+
+    </br>
+  <div class="row">
+      <div class ="col-md-7">
+            </br>
+            <a href="/" style="color: #666666">&nbsp;&nbsp;&nbsp;&nbsp;首页</a> > 
+            <a href="/bbs/" style="color: #666666">论坛</a>
+      </div>
+
+      <div class ="col-md-5">
+        <table>
+          <tr>
+          <form action ="/blog_search/?=" method="get">
+            <p>
+              <td>
+                <div class="dropdown">
                   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">文章排序
                     <span class="caret"></span>
                   </button>
@@ -63,31 +74,28 @@
                       <li><a href="/blog/?list_by=read">按阅读量</a></li>
                       <li><a href="/blog/?list_by=classification">按分类</a></li>
                     </ul>
-              </div>
-            </td>
-            <td>
-              <input  type="text" class="form-control" placeholder="输入你寻找的内容" name="search_content">
+                </div>
+              </td>
+              
+              <td>
+                <input  type="text" class="form-control" placeholder="输入你寻找的内容" name="search_content">
 <!--                   <div style="width:200px;height:50px;">
                     <input required='' type='text' class="form-control" name="search_content">
                     <label alt='请输入搜索内容' placeholder='名称'></label>
                   </div> -->
-            </td>
+              </td>
       
-            <td>
-              <button type="submit"  class="btn btn-default" value=""><span class="glyphicon glyphicon-search"></span></button>
-            </td>
-        </form>
-          </p>
-      </tr>
-    </table>
-  </div>
-</div>
+              <td>
+                <button type="submit"  class="btn btn-default" value=""><span class="glyphicon glyphicon-search"></span></button>
+              </td>
+            </p>
+          </tr>
+          </form>
+        </table>
+      </div>
+    </div>
+  <hr/>
 
-<hr/>
-
-
-
-<div class="main_body">
 
   {% ifequal blog_count 0 %}
 
@@ -97,104 +105,75 @@
 
   {% else %}
   
-   
-   
-      {% for blog in blogs %}
 
-      {% get_comment_count for blog as comment_count %}
 
+
+
+{% for article in articles %}
+
+<div class ="col-md-offset-1">
 <table>
   <tr>
     <td>
-      <img src="/static/img/me.jpg" class="img-circle" alt="你网速也太慢了吧～" style="width: 100px;  height: 100px;" />
+      <dl>
+        <dt>
+          <img src="{{ article.user.headimg }}" class="img-circle" alt="你网速也太慢了吧～" style="width: 70px;  height: 65px;" >
+        </dt>
+
+        <dt>
+          <p align="center">
+            <a href="/u/?username={{ article.user.username }}">{{ article.user.username }}</a>
+          </p>
+        </dt>
+      </dl>
     </td>
     
-    <td style="font-size:22px">
-      <div class="blog_body">
-        <div class ="blog_title">
+    <td>
+      <div class="caption">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a style="color:#8B636C;font-size:20px;" href="/a/?id={{ article.id }}" title="点击查看该文章～">
+            {{ article.caption }}
+            </a>
+      </div>
 
-          <p align="center" style="font-size:18px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <a style="color:black;text-decoration:none;" href="/t/?id={{ blog.id }}" data-toggle="tooltip" data-placement="top" title="点击查看该文章～" >   {{ blog.caption }}
-              </a>
-          </p>
-            
-        </div>
-  
-          <div class="blog_info1">
-              <span class="blog_info1_list">
-                <p style="font-size:14px">
-                
-             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <span class="blog_info2_list">
-                    <span class="glyphicon glyphicon-tags">  标签：
-                  {% for tag in blog.tags.all %} {{ tag.tag_name }}&nbsp;
+            </br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span style="float:center">阅读:&nbsp;<span class="badge">{{ article.read_num }}</span></span>                    
+            <span style="float:center">赞:&nbsp;<span class="badge">{{ article.mark_num }}</span></span>
+            <span style="float:center">评论:&nbsp;<span class="badge">{{ article.discuss_num }}</span></span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类:&nbsp;{{ article.classification }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发布于&nbsp;{{ article.update_time|date:"Y-m-d H:i" }} </span>
 
-                  {% endfor %} 
+            &nbsp;&nbsp; 
 
-                      <span class="glyphicon glyphicon-folder-open">&nbsp;分类:&nbsp;{{ blog.classification }}</span>
-                   
-                    </span>
-                </p>
-          </div>
+
     </td>
 
+  </tr>
 
-    <div class="blog_splitline"></div> 
-      <div class="highlight">
-        <!--  
-          <pre>
-            <div class="blog_description"><p style="font-size:20px"> {{ blog.content|truncatechars:15}}<p></div>
-          </pre>
-        -->
-      </div>
-        <div class="blog_info2">
-             
-                </span>
-              </span>
-
-        </div>
-      </div>   
-   </tr>
 </table> 
- 
 
-   
-    <span class="label label-default">
-      <span class="glyphicon glyphicon-time">发表时间：{{ blog.publish_time|date:"Y-m-d H:i" }}</span>
-    </span>
+</div>    
+<hr/>
+    
+    {% endfor %}
 
-    <p align="right">
-      <span class="glyphicon glyphicon-eye-open" style="color:#878787">阅读<span class="badge">{{ blog.counts }}
-        </span>
-      </span>
-              &nbsp;&nbsp;&nbsp;
-      <span style="color:#878787" class="glyphicon glyphicon-thumbs-up">赞<span class="badge">{{ blog.markCount}}
-        </span>
-      </span>
-              &nbsp;&nbsp;&nbsp;
-      <span style="color:#878787" class="glyphicon glyphicon-comment">评论<span class="badge">{{ comment_count }}
-        </span>
-      </span>
-  </p>
-
-  
-  <hr/>
-
-
-{% endfor %}
 
 {% endifequal %}            
         
-</div>
 
 
-      {% include "page.html" %}
+      {% include "article_page.html" %}
       
       <!--添加panel end-->
       </div>
-    </div>
 </div>
       <!--添加panel end-->
+
+
+
+
 
 <div class="modal fade" id="login_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">

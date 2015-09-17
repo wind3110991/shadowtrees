@@ -114,7 +114,7 @@
 			'	<div class="editor-textarea"></div>',
 			'	<div class="editor-preview active">',
 			'		<a href="javascript:void(0);" class="editor-preview-toggle"></a>',
-			'		<div class="editor-preview-body"></div>',
+			'		<div id="editor_content" class="editor-preview-body"></div>',
 			'	</div>',
 			'</div>'
 			].join('');

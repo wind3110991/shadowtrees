@@ -1,0 +1,116 @@
+<div class="panel panel-default">
+  <div class="panel">
+    <br/>
+    <span><a data-toggle="modal" data-target="#UserInfo" href=""  data-toggle="tooltip" data-placement="top">&nbsp;&nbsp;&nbsp;&nbsp;{{ author.username }}</a> 的动态 </span>
+    <hr/>
+    <div class="main_body">
+    </br>
+    {% for msg in msgs %}
+<table>
+    
+  <tr>
+<!--     <td>
+      <img src="{{ author.headimg }}" class="img-circle" alt="你网速也太慢了吧～" style="width: 70px;  height: 60px;" >
+    </td> -->
+    
+    <td>
+      <div class="blog_body">
+        <div class ="blog_title">
+          <p style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="/a/?id={{ msg.article.id }}">&nbsp;&nbsp;&nbsp;于 &nbsp;&nbsp;{{ msg.update_time|date:"Y-m-d H:i" }} &nbsp;&nbsp;{{ msg.send_msg }} 
+              </a>    
+          </p>
+        </div>
+        
+<!--       <div class="row">
+        <div class="col-md-4">
+          <p style="font-size:12px">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <span>分类:&nbsp;{{ article.classification }}
+              </span>
+          </p>
+        </div>
+
+ 
+
+        <div class="col-md-6">
+          <p style="font-size:12px">
+            <span>阅读:&nbsp;<span class="badge">{{ article.read_num }}</span></span>                    
+            <span>赞:&nbsp;<span class="badge">{{ article.mark_num }}</span></span>
+            <span>评论:&nbsp;<span class="badge">{{ article.discuss_num }}</span></span>  
+          </p>
+        </div>
+
+
+      </div> -->
+    </td>
+  </tr>
+
+          
+</table> 
+<!--     <div class="main_body">
+      <h5>&nbsp;&nbsp;{{ user.username }} 创建的文章</h5>
+      <hr/>
+      {% for article in articles %}
+
+      <a style="color: #666666"><p style="font-size:20px">&nbsp;&nbsp;{{ article.caption }}</p></a>
+      <p>创建时间 {{ article.update_time }}</p>
+      <hr/>
+      {% endfor %}
+
+      
+         
+    </div>  -->
+    
+    <hr/>
+    
+    {% endfor %}
+
+      
+      <br/><br/>   
+    </div> 
+  </div>
+</div>
+
+<div class="modal fade" id="UserInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span></button>
+              <h5 class="modal-title" id="myModalLabel">个人信息</h5>
+      </div>
+
+
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-1"><img src="{{ author.headimg }}" height="100" width="110" class="img-circle"/></div>
+            <div class="col-md-11">
+              <dl class="dl-horizontal">
+                <dt>Name</dt>
+                  <dd> {{ author.username }} </dd>
+                <dt>Sex</dt>
+                  <dd> {{ author.sex }}</dd>
+                <dt>Email</dt>
+                  <dd> {{ author.email }} </dd>
+                <dt>何方神圣</dt>
+                  <dd> {{ author.address }} </dd>
+                <dt>格言</dt>
+                  <dd> {{ author.motto }} </dd>
+                <dt>注册时间</dt>
+                  <dd> {{ author.regist_time }} </dd>
+                <dt>你的Shadow ID</dt>
+                  <dd> {{ author.id }} </dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+
+      <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+
+      </div>
+    </div>
+</div>

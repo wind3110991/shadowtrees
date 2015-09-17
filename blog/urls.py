@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^t/$', 'Myblog.views.blog_detail',name='blog_detail'),
+    url(r'^a/$', 'Myblog.views.article_detail',name='article_detail'),
 
     url(r'^$', 'Myblog.views.show_welcome_page',name='welcome'),# 首页
     url(r'^home/', 'Myblog.views.show_home_page',name='home'), 
@@ -24,9 +25,12 @@ urlpatterns = patterns('',
 
     url(r'^signup/', 'Myblog.views.signup',name='signup'),
     url(r'^modify/', 'Myblog.views.modify',name='modify'),
+    url(r'^favor/', 'Myblog.views.favor',name='favor'),
     url(r'^write/', 'Myblog.views.write',name='write'),
+    url(r'^test/', 'Myblog.views.test',name='test'),
     url(r'^user_page/', 'Myblog.views.user_page',name='user_page'),
-
+    url(r'^msg/', 'Myblog.views.msg',name='msg'),
+    url(r'^u/', 'Myblog.views.my_article',name='my_article'),
 
     url(r'^404/', 'Myblog.views.show_404_page',name='404'),
     url(r'^blog/', 'Myblog.views.blog_list',name='blog_list'),

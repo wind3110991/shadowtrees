@@ -1,0 +1,90 @@
+{% extends "bbs-base.html" %}
+
+{% block content_body %} 
+<style type="text/css">
+  body{ 
+    background:url(/static/img/back3.png);
+  }
+
+</style>
+<script src="/static/js/check_signup.js" type="text/javascript"></script>
+
+<div class="panel panel-default">
+      <br/>
+  <a href="/" style="color: #666666">&nbsp;&nbsp;&nbsp;&nbsp;首页</a> > 
+  <a href="/bbs/" style="color: #666666">论坛</a> >
+  <a href="/user_page/" style="color: #666666">{{ author.username }} 的文章</a>
+  <a style="float:right" data-toggle="modal" data-target="#UserInfo" href=""  data-toggle="tooltip" data-placement="top">关于Ta&nbsp;&nbsp;&nbsp;&nbsp;</a>
+    	<hr/>
+
+{% for article in articles %}
+<table>
+    
+  <tr>
+    <td>
+      &nbsp;&nbsp;&nbsp;
+      <img src="{{ author.headimg }}" class="img-circle" alt="你网速也太慢了吧～" style="width: 65px;  height: 60px;" >
+    </td>
+    
+    <td>
+      <div class="blog_body">
+        <div class ="blog_title">
+          <p style="font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <span>&nbsp;{{ author.username }}&nbsp;&nbsp;在 &nbsp;&nbsp;{{ article.update_time|date:"Y-m-d H:i" }} &nbsp;&nbsp;创建了文章&nbsp;&nbsp; 
+                  <a style="color:#BC8F8F;text-decoration:none;" href="/a/?id={{ article.id }}" data-toggle="tooltip" data-placement="top" title="点击查看该文章～">   《 {{ article.caption }} 》
+                  </a> 
+              </span>        
+          </p>
+        </div>
+        
+      <div class="row">
+        <div class="col-md-4">
+          <p style="font-size:12px">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <span>分类:&nbsp;{{ article.classification }}
+              </span>
+          </p>
+        </div>
+
+ 
+
+        <div class="col-md-6">
+          <p style="font-size:12px">
+            <span>阅读:&nbsp;<span class="badge">{{ article.read_num }}</span></span>                    
+            <span>赞:&nbsp;<span class="badge">{{ article.mark_num }}</span></span>
+            <span>评论:&nbsp;<span class="badge">{{ article.discuss_num }}</span></span>  
+          </p>
+        </div>
+
+
+      </div>
+    </td>
+  </tr>
+
+          
+</table> 
+<!--     <div class="main_body">
+      <h5>&nbsp;&nbsp;{{ user.username }} 创建的文章</h5>
+      <hr/>
+      {% for article in articles %}
+
+      <a style="color: #666666"><p style="font-size:20px">&nbsp;&nbsp;{{ article.caption }}</p></a>
+      <p>创建时间 {{ article.update_time }}</p>
+      <hr/>
+      {% endfor %}
+
+    	
+         
+    </div>  -->
+    
+    <hr/>
+    
+    {% endfor %}
+
+</div>
+
+</br>
+{% include "trend.html" %}
+
+{% endblock %}
+

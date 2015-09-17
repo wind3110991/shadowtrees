@@ -45,6 +45,31 @@ class User(models.Model):
     email = models.EmailField(max_length=50)
     motto = models.CharField(max_length=200, default='')
     address = models.CharField(max_length=60, default='')
+    headimg = models.CharField(max_length=200, default='')
+    regist_time = models.DateTimeField(auto_now=True)
+    msg_num = models.IntegerField(default=0)
+
+class Article(models.Model):
+    id = models.IntegerField(primary_key=True)
+    user = models.ForeignKey(User)
+    caption = models.CharField(max_length=50)
+    mark_num = models.IntegerField(default=0)
+    read_num = models.IntegerField(default=0)
+    discuss_num = models.IntegerField(default=0)
+    classification = models.CharField(max_length=10)
+    update_time = models.DateTimeField(auto_now=True)
+    content = models.TextField()
+
+class Message(models.Model):
+    id = models.IntegerField(primary_key=True)
+    sender = models.ForeignKey(User, related_name='senders')
+    receiver = models.ForeignKey(User, related_name='receivers')
+    recv_msg = models.CharField(max_length=50)
+    send_msg = models.CharField(max_length=50)
+    update_time = models.DateTimeField(auto_now=True)
+    article = models.ForeignKey(Article)
+    state = models.IntegerField(default=1)
+    operation = models.IntegerField()
 
 class Blog(models.Model): # 文章表
     caption = models.CharField(max_length=50)

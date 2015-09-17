@@ -1,0 +1,30 @@
+<style>
+a{
+    color: #2E8B57
+}
+</style>
+<ul class="pager">
+	<div class="pagination pagination-centered">
+        <ul>
+        {% if articles.has_previous %}
+            <li><a href="?page={{ blogs.previous_page_number }}">上一页</a></li>
+        {% else %}
+            <li class="active"><a>上一页</a></li>
+        {% endif %}
+
+        {% for p in articles.paginator.page_range %}
+            {% ifequal p blogs.number %}
+                <li class="active"><a>{{p}}</a><li>
+            {% else %}
+                <li><a href="?page={{p}}">{{p}}</a><li>
+            {% endifequal %}
+        {% endfor %}
+
+        {% if blogs.has_next %}
+            <li><a href="?page={{ articles.next_page_number }}">下一页</a></li>
+        {% else %}
+            <li class="active"><a>下一页</a></li>
+        {% endif %}
+        </ul>
+    </div>
+</ul>

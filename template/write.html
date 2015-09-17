@@ -6,6 +6,7 @@
 <script type="text/javascript">
 
 $(function(){
+
 	$("#textarea-1").markDownEditor({
 		//previewBodyClass : 'text-content',
 		//actions : [ 'bold', 'quote' ]
@@ -21,37 +22,32 @@ $(function(){
 
 <div class="panel panel-default">
     <div class="panel"><br/>
-	<a href="/" style="color: #666666">&nbsp;&nbsp;shadowtrees</a> > 
+	<a href="/" style="color: #666666">&nbsp;&nbsp;首页</a> > 
 	<a href="/bbs/" style="color: #666666">论坛</a> >
 	<a href="/write/" style="color: #666666">写点什么</a>
 	<hr/>
+
 	<span class="label label-default">&nbsp;&nbsp;点击选择分类</span>
 	<ul class="nav nav-pills" role="tablist">
-            <li role="presentation">
-              <a href="/product" style="color:#666666">产品</a>
+            <li role="presentation"><a id="c1"  href="#" style="color:#666666">杂说</a>
             </li>
-            <li role="presentation">
-              <a href="#" style="color:#666666">python</a>
+            <li role="presentation"><a id="c2" href="#" style="color:#666666">Linux</a>
             </li>
-            <li role="presentation"><a href="#" style="color:#666666">杂说</a>
+            <li role="presentation"><a id="c3" href="#" style="color:#666666">面试</a>
             </li>
-            <li role="presentation"><a href="#" style="color:#666666">Linux</a>
+            <li role="presentation"><a id="c4" href="#" style="color:#666666">技术</a>
             </li>
-            <li role="presentation"><a href="#" style="color:#666666">面试</a>
+            <li role="presentation"><a id="c5" href="#" style="color:#666666">后台</a>
             </li>
-            <li role="presentation"><a href="#" style="color:#666666">技术</a>
+            <li role="presentation"><a id="c6" href="#" style="color:#666666">django</a>
             </li>
-            <li role="presentation"><a href="#" style="color:#666666">后台</a>
+            <li role="presentation"><a id="c7" href="#" style="color:#666666">生活</a>
             </li>
-            <li role="presentation"><a href="#" style="color:#666666">django</a>
+            <li role="presentation"><a id="c8" href="#" style="color:#666666">工作</a>
             </li>
-            <li role="presentation"><a href="#" style="color:#666666">生活</a>
+            <li role="presentation"><a id="c9" href="#" style="color:#666666">动漫</a>
             </li>
-            <li role="presentation"><a href="#" style="color:#666666">工作</a>
-            </li>
-            <li role="presentation"><a href="#" style="color:#666666">动漫</a>
-            </li>
-            <li role="presentation"><a href="#" style="color:#666666">创意</a>
+            <li role="presentation"><a id="10" href="#" style="color:#666666">创意</a>
             </li>
     </ul>
     	<hr/>
@@ -71,7 +67,7 @@ $(function(){
 
 	<div class="input-group">
   		<span class="input-group-addon" id="basic-addon1">标题</span>
-  		<input type="text" class="form-control" placeholder="请输入标题" aria-describedby="basic-addon1">
+  		<input id="caption" type="text" class="form-control" placeholder="请输入标题" aria-describedby="basic-addon1">
 	</div>
 	</br>
 		<h5>&nbsp;&nbsp;分类:&nbsp;&nbsp;<span id="classlabel" class="label label-danger">无</span></h5>
@@ -84,12 +80,74 @@ $(function(){
     </div>
 
 	</br></br>
-    <p align="center"><button type="button" class="btn btn-default">发布</button></p>
+    <p align="center">
+        <button id="submit_article" class="button button--ujarak button--border-thin button--text-thick">发布文章</button>
+    </p>
 	</br>
 </div>
 
 
 <script type="text/javascript">
+  var classification;
+  $("#c1").click(function(){
+    classification = $("#c1").text();
+});
+  var classification;
+  $("#c2").click(function(){
+    classification = $("#c2").text();
+});
+
+  var classification;
+  $("#c3").click(function(){
+    classification = $("#c3").text();
+});
+
+  var classification;
+  $("#c4").click(function(){
+    classification = $("#c4").text();
+});
+
+  var classification;
+  $("#c5").click(function(){
+    classification = $("#c5").text();
+});
+  $("#submit_article").click(function(){
+    //var content = $("#textarea-1").val();
+    var content = $("#editor_content").html();
+    var caption = $("#caption").val();
+    
+    if(caption && content){
+    $.post("/write/", {caption:caption, content:content, classification:classification},
+        function(data){
+          var dataObj=eval("("+data+")");
+          if(dataObj.state == 0) {
+            //alert(dataObj.message);
+            $('#tips').modal();                      // 以默认值初始化
+            $('#tips').modal({ keyboard: false });   // initialized with no keyboard
+            $('#tips').modal('show');
+            $('#alert_text').text(dataObj.message);
+            setTimeout("window.location.href = '/bbs/';",3000);
+          }
+                
+          else {
+            $('#tips').modal();                      // 以默认值初始化
+            $('#tips').modal({ keyboard: false });   // initialized with no keyboard
+            $('#tips').modal('show');
+            $('#alert_text').text(dataObj.message);
+          }
+        });
+    }
+    else
+    {
+        $('#tips').modal();                      // 以默认值初始化
+        $('#tips').modal({ keyboard: false });   // initialized with no keyboard
+        $('#tips').modal('show');
+        $('#alert_text').text("标题和内容,还有分类都不能为空");
+    }
+    // $('#makesure').modal();                      // 以默认值初始化
+    // $('#makesure').modal({ keyboard: false });   // initialized with no keyboard
+    // $('#makesure').modal('show');
+  })
 
 </script>
 

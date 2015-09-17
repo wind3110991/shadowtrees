@@ -44,9 +44,9 @@ def login(request):
         password = request.POST.get('password', '')
 
         try:
+            login_user = 1
             user = User.objects.get(username=username)
             if user and password == user.password:
-                login_user = 1
 
                 json = {"state":0 ,"username": username, "login_user":login_user,
                  "message": "登录成功！5秒后将自动跳转，欢迎您回家！"}
@@ -92,6 +92,7 @@ def signup(request):
         password = request.POST.get('password', '')
         sex = request.POST.get('sex', '')
         email = request.POST.get('email', '')
+        headimg = '/static/img/owner.jpg'
 
         is_user_exit = User.objects.filter(username=username)
         is_email_exit = User.objects.filter(email=email)
@@ -104,7 +105,7 @@ def signup(request):
 
         else:
             if checkLegal(username) and checkLegal(password) and password != '':
-                user = User(username=username, password=password, sex=sex, donate=0, email=email)
+                user = User(username=username, password=password, sex=sex, donate=0, email=email, headimg=headimg)
                 user.save()
                 response = render_to_response('signup.html', {"state": 0, "message": "注册成功，5秒后将自动跳转，请登录"}, context_instance=RequestContext(request)) 
             
@@ -124,7 +125,8 @@ def modify(request):
             address = request.POST.get('address','')
             password = request.POST.get('password','')
             new_password = request.POST.get('new_password','')
-
+            headimg = request.POST.get('headimg','')
+            print headimg
             if motto:
                 user.motto = motto
                 user.save(update_fields=['motto'])
@@ -132,6 +134,10 @@ def modify(request):
             if address:   
                 user.address = address
                 user.save(update_fields=['address'])
+
+            if headimg:
+                user.headimg = headimg
+                user.save(update_fields=['headimg'])
 
             if password:
                 if password == user.password:
@@ -158,13 +164,265 @@ def modify(request):
             response = render_to_response('404.html', context_instance=RequestContext(request))
 
 
-def write(request):
+def msg(request):
     if request.method == 'GET':
-        response = render_to_response('write.html', context_instance=RequestContext(request))
+        username = request.COOKIES["login_user"]
+        user = User.objects.get(username=username)
+            #点开消息盒子，通知清零
+        user.msg_num = 0
+        user.save(update_fields=['msg_num'])
+
+        msgs = Message.objects.filter(receiver=user).order_by('-update_time')
+
+        response = render_to_response('msg.html', {"user": user, "msgs": msgs}, context_instance=RequestContext(request))
+        return response
+        # try:
+        #     username = request.COOKIES["login_user"]
+        #     user = User.objects.get(username=username)
+        #     #点开消息盒子，通知清零
+        #     user.msg_num = 0
+        #     user.save(update_fields=['msg_num'])
+
+        #     msgs = Message.objects.filter(receiver=user)
+
+        #     response = render_to_response('msg.html', {"user": user, "msgs": msgs}, context_instance=RequestContext(request))
+        #     return response
+        # except:
+        #     return render_to_response('404.html', context_instance=RequestContext(request))
+
+def my_article(request):
+    if request.method == 'GET':
+        try:
+            username = request.GET.get('username','')
+            author = User.objects.get(username=username)
+
+            us = request.COOKIES["login_user"]
+            user = User.objects.get(username=us)
+
+            articles = Article.objects.filter(user=author).order_by('-update_time')
+
+            msgs = Message.objects.filter(sender=user).order_by('-update_time')
+
+            response = render_to_response('article.html', {"msgs":msgs, "author": author, "user":user, "articles":articles}, context_instance=RequestContext(request))
+            return response
+        except:
+            return render_to_response('404.html', context_instance=RequestContext(request))
+
+def article_detail(request):
+    if request.method == 'GET':
+        id = request.GET.get('id','')
+
+        try:
+            username = request.COOKIES["login_user"]
+            user = User.objects.get(username=username)
+            article = Article.objects.get(id=id)
+            article.read_num += 1
+            article.save(update_fields=['read_num'])
+            response = render_to_response('article_detail.html', {"user":user, "article":article}, context_instance=RequestContext(request))
+        
+        except:
+            article = Article.objects.get(id=id)
+            article.read_num += 1
+            article.save(update_fields=['read_num'])
+            response = render_to_response('article_detail.html', {"article":article}, context_instance=RequestContext(request))
         return response
 
+@csrf_exempt
+def favor(request):
     if request.method == 'POST':
-        pass
+        article_id = request.POST.get('id','')
+        # username = request.COOKIES["login_user"]
+        
+        # user = User.objects.get(username=username)
+        # article = Article.objects.get(id=article_id)
+        # #operation为1默认为赞操作
+        # msgs = Message.objects.filter(article=article).filter(operation=1).filter(sender=user)
+
+        # if msgs:
+        #     #已经赞过了
+        #     json = {"state": 1, "message": "你已经赞过这篇文章了哦"}
+        #     JsonData = simplejson.dumps(json, ensure_ascii=False)
+        #     response = HttpResponse(JsonData)
+        # else:
+        #     article.mark_num += 1
+        #     article.save(update_fields=['mark_num'])
+        #     send_message(request,1)
+
+        #     json = {"state": 0, "message": "点赞！"}
+        #     JsonData = simplejson.dumps(json, ensure_ascii=False)
+        #     response = HttpResponse(JsonData)
+        # return response
+
+        try:
+            username = request.COOKIES["login_user"]
+            user = User.objects.get(username=username)
+            article = Article.objects.get(id=article_id)
+            #operation为1默认为赞操作
+            msgs = Message.objects.filter(article=article).filter(operation=1).filter(sender=user)
+
+            if msgs:
+                #已经赞过了
+                json = {"state": 1, "message": "你已经赞过这篇文章了哦"}
+                JsonData = simplejson.dumps(json, ensure_ascii=False)
+                response = HttpResponse(JsonData)
+                return response
+
+            else:
+                article.mark_num += 1
+                article.save(update_fields=['mark_num'])
+                
+                if send_message(request,1) == 0:
+                    json = {"state": 0, "message": "点赞！么么哒"}
+                    JsonData = simplejson.dumps(json, ensure_ascii=False)
+                    response = HttpResponse(JsonData)
+
+                else:
+                    json = {"state": 3, "message": "系统故障"}
+                    JsonData = simplejson.dumps(json, ensure_ascii=False)
+                    response = HttpResponse(JsonData)
+                return response
+        
+        except:
+            #提示未登录
+            json = {"state": 2, "message": "请先登录哦~"}
+            JsonData = simplejson.dumps(json, ensure_ascii=False)
+            response = HttpResponse(JsonData)
+        return response
+
+def send_message(request,operation):
+    # recv_msg = ''
+    # send_msg = ''
+    # sendername = request.COOKIES["login_user"]
+    # sender = User.objects.get(username=sendername)
+
+    # article_id = request.GET.get('id', '')
+    # article = Article.objects.get(id=article_id)
+
+    # receiver = article.user
+    # receiver.msg_num += 1
+    # receiver.save(update_fields=['msg_num'])
+
+    # if operation == 1:
+    #     recv_msg = '%s 赞了你的文章 《%s》' % (sender.username , article.caption)
+    #     send_msg = '你赞了 %s 的文章 《%s》' % (receiver.username , article.caption)
+        
+    # elif operation == 0:
+    #     recv_msg = '%s 评论了你的文章 《%s》' % (sender.username , article.caption)
+    #     send_msg = '你评论了 %s 的文章 《%s》' % (receiver.username , article.caption)
+
+    # elif operation == 2:
+    #     recv_msg = '%s 收藏了你的文章 《%s》' % (sender.username , article.caption)
+    #     send_msg = '你收藏了 %s 的文章 《%s》' % (receiver.username , article.caption)
+        
+    # msg = Message(article=article, sender=sender, receiver=receiver, send_msg=send_msg, recv_msg=recv_msg, 
+    # operation=operation, state=1) #未读消息状态是1
+    # msg.save()
+    try:
+        recv_msg = ''
+        send_msg = ''
+        sendername = request.COOKIES["login_user"]
+        sender = User.objects.get(username=sendername)
+
+        article_id = request.POST.get('id', '')
+        article = Article.objects.get(id=article_id)
+
+        receiver = article.user
+        receiver.msg_num += 1
+        receiver.save(update_fields=['msg_num'])
+
+        if operation == 1:
+            recv_msg = '%s 赞了你的文章 《%s》' % (sender.username , article.caption)
+            send_msg = '你赞了 %s 的文章 《%s》' % (receiver.username , article.caption)
+        
+        elif operation == 0:
+            recv_msg = '%s 评论了你的文章 《%s》' % (sender.username , article.caption)
+            send_msg = '你评论了 %s 的文章 《%s》' % (receiver.username , article.caption)
+
+        elif operation == 2:
+            recv_msg = '%s 收藏了你的文章 《%s》' % (sender.username , article.caption)
+            send_msg = '你收藏了 %s 的文章 《%s》' % (receiver.username , article.caption)
+        
+        msg = Message(article=article, sender=sender, receiver=receiver, send_msg=send_msg, recv_msg=recv_msg,
+         operation=operation, state=1) #未读消息状态是1
+        msg.save()
+        return 0
+
+    except:
+        print "send error"
+        return 1
+        
+
+@csrf_exempt
+def write(request):
+    if request.method == 'GET':
+        try:
+            username = request.COOKIES["login_user"]
+            user = User.objects.get(username=username)
+
+            response = render_to_response('write.html', {"user": user}, context_instance=RequestContext(request))
+            return response
+        except:
+            render_to_response('404.html', context_instance=RequestContext(request))
+
+    elif request.method == 'POST':
+        username = request.COOKIES["login_user"]
+        user = User.objects.get(username=username)
+
+        caption = request.POST.get('caption', '')
+        content = request.POST.get('content', '')
+        classification = request.POST.get('classification', '')
+
+        new_article = Article(caption=caption, content=content, classification=classification, user=user)
+        new_article.save()
+
+        #recv_msg = '??'
+        #send_msg = '%s 创建了新文章 《%s》' % (username, caption)
+
+        #superadmin =  User.objects.get(id=0)
+        #msg = Message(article=new_article, sender=user, receiver=superadmin, send_msg=send_msg, recv_msg=recv_msg,
+        # operation=3, state=1)
+        #msg.save()
+
+        # response = render_to_response('write.html', {"state": 0, "message": "发布成功！", "user": user}, context_instance=RequestContext(request))
+        # return response
+        json = {"state": 0, "message": "发布成功！"}
+        JsonData = simplejson.dumps(json, ensure_ascii=False)
+        response = HttpResponse(JsonData)
+        return response
+
+    else:
+        json = {"state": 2, "message": "发布失败，请重试！"}
+        JsonData = simplejson.dumps(json, ensure_ascii=False)
+        response = HttpResponse(JsonData)
+        return response
+
+@csrf_exempt
+def test(request):
+    if request.method == 'POST':
+        username = request.COOKIES["login_user"]
+        user = User.objects.get(username=username)
+
+        caption = request.POST.get('caption', '')
+        content = request.POST.get('content', '')
+        classification = request.POST.get('classification', '')
+        print username,caption,content,classification
+       
+        new_article = Article(caption=caption, content=content, classification=classification,
+         user=user, discuss_num=0, read_num=0,mark_num=0)
+        print "sad"
+        new_article.save()
+
+        recv_msg = '%s 创建了新文章 《%s》' % (username, caption)
+        send_msg = ''
+
+        msg = Message(article=new_article, sender=None, receiver=user, send_msg=send_msg, recv_msg=recv_msg,
+         operation=3, state=1)
+        msg.save()
+
+        json = {"state": 0, "message": "发布成功！"}
+        JsonData = simplejson.dumps(json, ensure_ascii=False)
+        response = HttpResponse(JsonData)
+        return response
 
 def user_page(request):
     if request.method == 'GET':
@@ -180,36 +438,36 @@ def user_page(request):
         return response
 
 def bbs_list(request):
-    blogs = show_airticle(request)
+    articles = show_airticle(request)
     try:
         login_user = request.COOKIES["login_user"]
         user = User.objects.get(username=login_user)
 
-        return render_to_response('bbs.html', {"user":user, "blogs": blogs}, context_instance=RequestContext(request))
+        return render_to_response('bbs.html', {"user":user, "articles": articles}, context_instance=RequestContext(request))
     except:
-        return render_to_response('bbs.html', {"blogs": blogs}, context_instance=RequestContext(request))
+        return render_to_response('bbs.html', {"articles": articles}, context_instance=RequestContext(request))
 
         
 def show_airticle(request):
-    blog_list = Blog.objects.all().order_by('-publish_time')
+    article_list = Article.objects.all().order_by('-update_time')
     if request.GET.get('list_by') == 'read':
-        blog_list = Blog.objects.all().order_by('-counts')
+        article_list = Article.objects.all().order_by('-counts')
 
     elif request.GET.get('list_by') == 'classification':
-        blog_list = Blog.objects.all().order_by('classification')
+        article_list = Article.objects.all().order_by('classification')
 
-    paginator = Paginator(blog_list, 16)#分页处理
+    paginator = Paginator(article_list, 20)#分页处理
     page = request.GET.get('page')
 
     try:
-        blogs = paginator.page(page)
+        articles = paginator.page(page)
 
     except PageNotAnInteger:
-        blogs = paginator.page(1)
+        articles = paginator.page(1)
 
     except EmptyPage:
-        blogs = paginator.page(paginator.num_pages)
-    return blogs
+        articles = paginator.page(paginator.num_pages)
+    return articles
 
 
 def blog_list(request):
@@ -240,7 +498,6 @@ def blog_list(request):
 
 
 @csrf_exempt
-
 def blog_search(request):
     try:
         allblog = Blog.objects.all().order_by('caption')
